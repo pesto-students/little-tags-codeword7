@@ -1,5 +1,5 @@
 import React from 'react';
-import './Login.css';
+import './Login.scss';
 import { ImFacebook } from 'react-icons/im';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { GrFormClose } from 'react-icons/gr';
