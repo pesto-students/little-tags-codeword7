@@ -5,7 +5,7 @@ function ProductDesc() {
   const productArray = [
     {
       "_id": "1",
-      "title": "Nike Shoes",
+      "title": "Shoes",
       "src": [
         "https://picsum.photos/id/0/300/200",
         "https://picsum.photos/id/1/300/200",
