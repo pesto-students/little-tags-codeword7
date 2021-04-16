@@ -14,7 +14,7 @@ export default function DashboardCategory() {
       </div>
       <div className="gallery-img-2">
         <img
-          src="https://lh3.googleusercontent.com/proxy/mJk5DoyAwt0hQL9NHPWjf_ZS00tX6ZbeNN2IWmAsH3XRH9LRy8uzvURN90zlrJkrzQfd_fuLSmGt1Lfe1lp3wDNUAiZrEVDAB7l5hESSp0eSmDtkkG7ZJw"
+          src="https://www.pymnts.com/wp-content/uploads/2017/12/diamonds.jpg"
           alt=""
           className="gallery-img"
         />

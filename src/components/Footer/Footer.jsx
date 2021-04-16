@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from "react";
 import "./Footer.scss";
 import { FaCcMastercard, FaCcVisa, FaCcPaypal } from "react-icons/fa";
