@@ -1,0 +1,87 @@
+.main-part {
+    padding: 4rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+    background-color: #0a0a0a;
+}
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    // flex-grow: 1;
+    flex-basis: 33%;
+}
+.footer-category {
+    flex-grow: 2;
+}
+.subscribe {
+    flex-grow: 1;
+}
+.footer-heading {
+    font-size: 2.5rem;
+    font-weight: 300;
+    /* color: goldenrod; */
+    margin: 0 0 2rem 0;
+    font-family: 'Nunito';
+    letter-spacing: 0.1rem;
+    color: #fff;
+}
+.footer-list-item {
+      margin-bottom: 1rem;
+}
+.footer-list-link {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #bbb;
+}
+.subscribe-input {
+  display: flex;
+}
+.footer-input {
+  width: 15rem;
+  padding: 0.1rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.8rem;
+  color: #444;
+  outline: none;
+}
+.footer-btn {
+  padding: 0.8rem;
+  background-color:gray;
+  color: white;
+  border: none;
+}
+.footer-paragraph {
+  color: #bbb;
+  font-size: 1.5rem;
+}
+.footer-payment {
+  display: flex;
+  width: 15rem;
+  justify-content: space-between;
+}
+.payment-icon {
+  font-size: 2rem;
+}
+.creator-part {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #030303;
+  padding: 0 4rem;
+  font-family: 'Nunito';
+}
+.copyright-text {
+  font-size: 1.5rem;
+  color: #aaa;
+}
+.text-right {
+  font-size: 2rem;
+  color: #bbb;
+}

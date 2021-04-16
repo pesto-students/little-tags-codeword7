@@ -1,0 +1,48 @@
+.HomeBanner {
+  background-image: url("../../assets/home_banner.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 33vh;
+  position: relative;
+  margin-top: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bannerText h2 {
+  font-size: 25px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: rgba(3, 2, 2, 0.877);
+  margin: 0;
+}
+
+.bannerText p {
+  font-size: 15px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  color: black;
+  margin: 0;
+}
+
+@media (min-width: 40rem) {
+  .HomeBanner {
+    height: 70vh;
+  }
+
+  .bannerText h2 {
+    font-size: 45px;
+  }
+
+  .bannerText p {
+    font-size: 30px;
+  }
+}
+
+

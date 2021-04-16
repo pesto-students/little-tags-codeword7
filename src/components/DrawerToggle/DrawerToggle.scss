@@ -1,0 +1,32 @@
+.DrawerToggle {
+  // margin-top: 2rem;
+  cursor: pointer;
+  margin-left: 2.5rem;
+  transition: all 1s;
+}
+
+// .DrawerToggle div {
+//   width: 70%;
+//   height: 0.1rem;
+//   background-color: white;
+// }
+.line {
+  height: 0.2rem;
+  width: 1.5rem;
+  background-color: white;
+  margin-bottom: 0.4rem;
+  transition: all 0.5s;
+}
+.line-2 {
+  opacity: 0;
+}
+.line-1 {
+  transform: rotate(
+    -405deg
+    ) translate(-1px, 2px);
+  width: 1.5em
+}
+.line-3 {
+  transform: rotate(405deg) translate(-6px, -7px);
+  width: 1.5rem;
+}

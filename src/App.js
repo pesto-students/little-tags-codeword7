@@ -1,25 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import Dashboard from './components/Dashboard/Dashboard';
+import * as ROUTES from './constants/routes';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Header from './components/Header/HeaderComponent';
+import Footer from './components/Footer/Footer';
+import Cart from './components/Cart/Cart';
+import withAuthenticaton from './hoc/withAuthentication';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    // <Dashboard />
+    <div className="main-app">
+      <Header />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path={ROUTES.DASHBOARD}>
+            <Dashboard />
+          </Route>
+          <Route path={ROUTES.CART}>
+            <Cart />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+      <Footer className="footer" />
     </div>
   );
 }
 
-export default App;
+export default withAuthenticaton(App);

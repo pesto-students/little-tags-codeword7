@@ -1,0 +1,16 @@
+.product-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 2rem;
+  justify-content: center;
+}
+// .product-cards > * {
+//       margin-left: 2rem;
+// }
+.products-main-header {
+  font-family: 'Nunito Sans';
+  font-size: 2.5rem;
+    letter-spacing: 0.2rem;
+}
