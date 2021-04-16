@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './Login.scss';
 import { ImFacebook } from 'react-icons/im';
 import { AiOutlineGoogle } from 'react-icons/ai';
@@ -13,7 +13,6 @@ const Login = ({ isLoginModal, setIsLoginModal }) => {
             .doGoogleSignIn()
             .then((authUser) => {
                 setIsLoginModal(false);
-                console.log(authUser);
                 return firebase.user(authUser.user.uid).set({
                     email: authUser.user.email,
                     username: authUser.user.displayName,
