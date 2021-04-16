@@ -1,8 +1,6 @@
 import React from 'react';
-import Header from '../Header/HeaderComponent';
 import Homebanner from '../Homebanner/HomeBanner';
 import DashboardCategory from '../DashboardCategory/DashboardCategory';
-import Footer from '../Footer/Footer';
 import './Dashboard.scss';
 
 const Dashboard = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './DrawerToggle.scss';
 
 function DrawerToggle({ isSidebar, setIsSidebar }) {

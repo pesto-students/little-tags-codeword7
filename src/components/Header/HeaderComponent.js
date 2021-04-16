@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import './HeaderComponent.scss'
 import DrawerToggle from '../DrawerToggle/DrawerToggle';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -6,13 +6,13 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
 import Sidebar from '../Sidebar/Sidebar';
 import Login from '../Login/Login';
-import FirebaseContext from '../../Config/Firebase/context';
+// import FirebaseContext from '../../Config/Firebase/context';
 
 
 function HeaderComponent() {
   const [isSidebar, setIsSidebar] = useState(false);
   const [isLoginModal, setIsLoginModal] = useState(false);
-  const firebase = useContext(FirebaseContext);
+  // const firebase = useContext(FirebaseContext);
 
   return (
     <header>
