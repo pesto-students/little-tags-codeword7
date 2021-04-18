@@ -2,34 +2,47 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Product from "../Product/Product";
 import "./ProductCategory.scss";
-const API_URL = "https://fakestoreapi.com/products";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
+import { fetchProductsStart } from "../../redux/Products/products.action";
+import { useSelector } from "react-redux";
+
+
+const mapState = ({ productsData }) => ({
+  products: productsData.products
+})
 
 export default function ProductCategory() {
   const [data, setData] = useState([]);
-
+  const dispatch = useDispatch();
+  const { filterType } = useParams();
+  console.log("In Main Component", filterType);
+  const { products } = useSelector(mapState);
+  
   useEffect(() => {
-    async function getData() {
-      let productData = await axios(`${API_URL}`);
-      // const resultData = await productData.json();
-      // productData = productData.data.filter(
-      //   (product) => product.category === "jewelery"
-      // );
-      setData(productData.data);
-    }
-    getData();
-  }, []);
+      dispatch(fetchProductsStart({filterType}))
+  }, [filterType]);
+
+  if(!Array.isArray(products)) return null;
+  if(products.length < 1) {
+      return (
+        <div>No Search Results</div>
+      )
+  }
+
   return (
-    <div>
+    <div className="product-category-wrapper">
       <h3 className="products-main-header">New Arrivals</h3>
       <div className="product-cards">
-        {data.map((product) => (
-          <Product
-            key={product.id}
-            title={product.title}
-            price={product.price}
-            image={product.image}
+        {products.map((product, pos) => {
+          const configProduct = {
+            ...product
+          }
+          return <Product
+            key={pos}
+            {...configProduct}
           />
-        ))}
+        })}
       </div>
     </div>
   );

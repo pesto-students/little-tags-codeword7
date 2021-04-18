@@ -3,26 +3,23 @@ import './Login.scss';
 import { ImFacebook } from 'react-icons/im';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { GrFormClose } from 'react-icons/gr';
-import FirebaseContext from '../../Config/Firebase/context';
+import FirebaseContext from '../../config/Firebase/context';
+import { useDispatch, useSelector } from 'react-redux';
+import { googleSignInStart } from '../../redux/User/user.actions';
+
+const mapState = ({user}) => ({
+    currentUser: user.currentUser
+})
 
 const Login = ({ isLoginModal, setIsLoginModal }) => {
     const firebase = useContext(FirebaseContext);
+    const dispatch = useDispatch();
+    const { currentUser } = useSelector(mapState);
 
     const handleGoogleSignIn = () => {
-        firebase
-            .doGoogleSignIn()
-            .then((authUser) => {
-                setIsLoginModal(false);
-                return firebase.user(authUser.user.uid).set({
-                    email: authUser.user.email,
-                    username: authUser.user.displayName,
-                    roles: {}
-                });
-            })
-            .catch((error) => {
-                console.log(error.message);
-            })
+        dispatch(googleSignInStart());
     }
+
     const doFacebookSignIn = () => {
         firebase.doFacebookSignIn().then((facebookUser) => {
             console.log(facebookUser);

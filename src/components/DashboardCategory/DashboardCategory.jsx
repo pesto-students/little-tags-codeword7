@@ -1,5 +1,6 @@
 import React from "react";
 import "./DashboardCategory.scss";
+import { Link } from 'react-router-dom';
 
 export default function DashboardCategory() {
   return (
@@ -10,7 +11,9 @@ export default function DashboardCategory() {
           alt=""
           className="gallery-img "
         />
-        <h1 className="image-heading">Men Clothing</h1>
+        <h1 className="image-heading"><Link to="/products/men clothing">
+            Men Clothing
+          </Link></h1>
       </div>
       <div className="gallery-img-2">
         <img
@@ -18,7 +21,9 @@ export default function DashboardCategory() {
           alt=""
           className="gallery-img"
         />
-        <h2 className="image-heading">Jewelery</h2>
+        <h2 className="image-heading"><Link to="/products/jewelery">
+          Jewelery
+          </Link></h2>
       </div>
       <div className="gallery-img-3">
         <img
@@ -26,7 +31,9 @@ export default function DashboardCategory() {
           alt=""
           className="gallery-img"
         />
-        <h2 className="image-heading electronic">Electronics</h2>
+        <h2 className="image-heading electronic"><Link to="/products/electronics">
+              Electronics
+          </Link></h2>
       </div>
       <div className="gallery-img-4">
         <img
@@ -34,7 +41,9 @@ export default function DashboardCategory() {
           alt=""
           className="gallery-img"
         />
-        <h2 className="image-heading electronic">Women's Clothing</h2>
+        <h2 className="image-heading electronic"><Link to="/products/women clothing">
+          Women's Clothing
+          </Link></h2>
       </div>
     </section>
   );
