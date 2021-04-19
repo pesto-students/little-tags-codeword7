@@ -43,7 +43,7 @@ export default function Cart() {
               <div className="remove">Remove</div>
             </div>
           </div>
-          <div className="line-2"></div>
+          <div className="cart-line-2"></div>
         </div>
         <div>
           <div className="checkout-wrapper">
@@ -55,7 +55,7 @@ export default function Cart() {
               <div className="cart-item-title">Shipping:</div>
               <div className="cart-item-price">Free</div>
             </div>
-            <div className="line-1"></div>
+            <div className="cart-line-1"></div>
             <div className="grand-total">
               <div className="cart-item-title">Grand Total:</div>
               <div className="cart-item-price">800$</div>

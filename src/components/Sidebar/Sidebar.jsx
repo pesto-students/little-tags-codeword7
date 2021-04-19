@@ -1,10 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import "./Sidebar.scss";
 
-export default function Sidebar() {
+export default function Sidebar({ isSidebar }) {
   return (
-    <div className="sidebar">
-      <h3 className="tag-header">Litte Tags</h3>
+    <div className={isSidebar ? 'openSidebar' : 'closeSidebar'}>
       <div className="greeting">Hey Mihir</div>
       <div className="category-list">
         <div className="menu">
