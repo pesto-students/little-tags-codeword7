@@ -7,7 +7,7 @@ import FirebaseContext from '../../config/Firebase/context';
 import { useDispatch, useSelector } from 'react-redux';
 import { googleSignInStart } from '../../redux/User/user.actions';
 
-const mapState = ({user}) => ({
+const mapState = ({ user }) => ({
     currentUser: user.currentUser
 })
 

@@ -2,14 +2,19 @@ import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
 import * as ROUTES from './constants/routes';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Header from './components/Header/HeaderComponent';
-import Footer from './components/Footer/Footer';
 import Cart from './components/Cart/Cart';
 import withAuthenticaton from './hoc/withAuthentication';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { checkUserSession } from './redux/User/user.actions';
-import  ProductCategory  from './components/ProductCategory/ProductCategory';
+import ProductCategory from './components/ProductCategory/ProductCategory';
+import MainLayout from './layout/MainLayout';
+import ShipmentAddress from './components/ShipmentAddress/ShipmentAddress';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { publishableKey } from './config/StripeConfig';
+
+const stripePromise = loadStripe(publishableKey);
 
 const App = () => {
 
@@ -21,24 +26,37 @@ const App = () => {
   return (
     // <Dashboard />
     <div className="main-app">
-      <Header />
       <BrowserRouter>
         <Switch>
           <Route exact path={ROUTES.DASHBOARD}>
-            <Dashboard />
+            <MainLayout>
+              <Dashboard />
+            </MainLayout>
           </Route>
           <Route path={ROUTES.CART}>
-            <Cart />
+            <MainLayout>
+              <Cart />
+            </MainLayout>
           </Route>
           <Route exact path={ROUTES.PRODUCTS}>
-            <ProductCategory />
+            <MainLayout>
+              <ProductCategory />
+            </MainLayout>
           </Route>
           <Route path={ROUTES.PRODUCT_CATEGORY}>
-            <ProductCategory />
+            <MainLayout>
+              <ProductCategory />
+            </MainLayout>
+          </Route>
+          <Route path={ROUTES.PAYMENT}>
+            <Elements stripe={stripePromise}>
+              <MainLayout>
+                <ShipmentAddress />
+              </MainLayout>
+            </Elements>
           </Route>
         </Switch>
       </BrowserRouter>
-      <Footer className="footer" />
     </div>
   );
 }

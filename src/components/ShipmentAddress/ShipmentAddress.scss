@@ -1,8 +1,12 @@
 .checkout {
   display: flex;
-  flex-direction: row;
-  column-gap: 2rem;
-  flex-wrap: wrap;
+    flex-direction: row;
+    grid-column-gap: 2rem;
+    column-gap: 2rem;
+    flex-wrap: wrap;
+    background-color: white;
+    margin-top: 8rem;
+    padding: 5rem;
 }
 .address{
   // flex-basis: 50%;
@@ -10,6 +14,7 @@
   border: 1px solid #e0dede;
   // border-color: #e0dede;
   padding: 2rem;
+  flex-grow: 1;
 }
 .payment {
   border: 1px solid #e0dede;
@@ -23,6 +28,7 @@
   letter-spacing: 0.1rem;
   font-weight: 600;
   font-family: 'Nunito';
+  font-size: 2.5rem;
 }
 .title {
   position: relative;
@@ -44,7 +50,7 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
+  margin-top: 2rem;
   flex-grow: 1;
 }
 .form-label {

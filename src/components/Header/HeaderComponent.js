@@ -37,21 +37,21 @@ function HeaderComponent() {
           <AiOutlineSearch className="search-icon" />
         </div>
 
-        {currentUser && 
+        {currentUser &&
           [<div className='login'>
-          <BiLogIn className="login-icon" /><span className="login-title">{currentUser.displayName}</span>
-        </div>
+            <BiLogIn className="login-icon" /><span className="login-title">{currentUser.displayName}</span>
+          </div>
           ]}
 
-          {!currentUser && 
+        {!currentUser &&
           [<div className='login' onClick={() => setIsLoginModal(!isLoginModal)}>
-          <BiLogIn className="login-icon" /><span className="login-title">Login / Sign Up</span>
-        </div>
+            <BiLogIn className="login-icon" /><span className="login-title">Login / Sign Up</span>
+          </div>
           ]}
 
-          {currentUser && 
+        {currentUser &&
           [<div className='cartContainer'>
-            <FaShoppingCart className="login-icon" /><span className="login-title"><Link to="/cart">
+            <FaShoppingCart className="login-icon" /><span className="login-title"><Link className="link" to="/cart">
               Your Cart({totalNumberOfCartItem})
           </Link></span>
           </div>
