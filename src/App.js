@@ -10,6 +10,7 @@ import { checkUserSession } from './redux/User/user.actions';
 import ProductCategory from './components/ProductCategory/ProductCategory';
 import MainLayout from './layout/MainLayout';
 import ShipmentAddress from './components/ShipmentAddress/ShipmentAddress';
+import ProductDesc from './components/ProductDesc/ProductDesc';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { publishableKey } from './config/StripeConfig';
@@ -54,6 +55,16 @@ const App = () => {
                 <ShipmentAddress />
               </MainLayout>
             </Elements>
+          </Route>
+          <Route path={ROUTES.PRODUCT_DETAILS}>
+            <MainLayout>
+              <ProductDesc />
+            </MainLayout>
+          </Route>
+          <Route path={ROUTES.ORDERS}>
+            <MainLayout>
+              <ProductDesc />
+            </MainLayout>
           </Route>
         </Switch>
       </BrowserRouter>

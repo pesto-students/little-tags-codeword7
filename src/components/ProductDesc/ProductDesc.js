@@ -1,7 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react'
-import './ProductDesc.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router';
+import './ProductDesc.scss';
+import { setProduct, fetchProductStart } from '../../redux/Products/products.action';
+
+const mapState = state => ({
+  product: state.productsData.product
+})
 
 function ProductDesc() {
+
+  const dispatch = useDispatch();
+  const { productID } = useParams();
+  const { product } = useSelector(mapState);
+
+  const { id, image, title, price, description } = product;
+
+  useEffect(() => {
+    dispatch(
+      fetchProductStart(productID)
+    );
+
+    return () => {
+      setProduct({})
+    }
+  }, []);
+
   const productArray = [
     {
       "_id": "1",
@@ -23,9 +47,9 @@ function ProductDesc() {
 
   const myRef = useRef()
 
-  useEffect(() => {
-    myRef.current.children[index].className = "active";
-  }, [index])
+  // useEffect(() => {
+  //   myRef.current.children[index].className = "active";
+  // }, [index])
 
   const handleTab = index => {
     setIndex(index)
@@ -38,31 +62,29 @@ function ProductDesc() {
 
   return (
     <div className="app">
-      {
-        products.map(item => (
-          <div className="details" key={item._id}>
-            <div className="big-img">
-              <img src={item.src[index]} alt="" />
-            </div>
+      <div className="details">
+        <div className="big-img">
+          <img src={image} alt="" />
+        </div>
 
-            <div className="box">
-              <div className="row">
-                <h2>{item.title}</h2>
-                <span>₹{item.price}</span>
-              </div>
-              <div className="colors">
+        <div className="box">
+          <div className="row">
+            <h2>{title}</h2>
+            <span>₹{price}</span>
+          </div>
+          {/* <div className="colors">
                 {
                   item.size.map((size, index) => (
                     <button key={index}>{size}</button>
                   ))
                 }
-              </div>
+              </div> */}
 
-              <p>{item.description}</p>
-              {/* <p>{item.content}</p> */}
+          <p>{description}</p>
+          {/* <p>{item.content}</p> */}
 
-              {/* <DetailsThumb images={item.src} tab={handleTab} myRef={myRef} /> */}
-              <div className="thumb" ref={myRef}>
+          {/* <DetailsThumb images={item.src} tab={handleTab} myRef={myRef} /> */}
+          {/* <div className="thumb" ref={myRef}>
                 {
                   item.src.map((img, index) => (
                     <img src={img} alt="" key={index}
@@ -70,15 +92,13 @@ function ProductDesc() {
                     />
                   ))
                 }
-              </div>
-              <button className="cart">Add to cart</button>
+              </div> */}
+          <button className="cart">Add to cart</button>
 
-            </div>
-          </div>
-        ))
-      }
+        </div>
+      </div>
     </div>
   )
 }
 
-export default ProductDesc
+export default ProductDesc;

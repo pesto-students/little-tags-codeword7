@@ -3,7 +3,8 @@ import FormInput from '../../UI/FormInput/FormInput';
 import React, { useState, useRef } from "react";
 import { createStructuredSelector } from "reselect";
 import { selectCartItems, selectCartTotal, selectCartItemsCount } from "../../redux/Cart/cart.selector";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { saveOrderHistory } from '../../redux/Orders/orders.action';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { apiInstance } from '../../config/api';
 
@@ -33,6 +34,7 @@ export default function ShipmentAddress() {
   const stripe = useStripe();
   const elements = useElements();
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
 
   const handleShipping = (evt) => {
     const { name, value } = evt.target;
@@ -43,54 +45,65 @@ export default function ShipmentAddress() {
   }
 
   const handleFormSubmit = () => {
-    const cardElement = elements.getElement('card');
-    console.log("card element", cardElement);
-    apiInstance.post('/payments/create', {
-      amount: total,
-      shipping: {
-        name: recipientFirstName + recipientLastName,
-        address: {
-          ...billingAddress
-        }
+    // const cardElement = elements.getElement('card');
+    // console.log("card element", cardElement);
+    // apiInstance.post('/payments/create', {
+    //   amount: total,
+    //   shipping: {
+    //     name: recipientFirstName + recipientLastName,
+    //     address: {
+    //       ...billingAddress
+    //     }
+    //   }
+    // }).then(({ data: clientSecret }) => {
+
+    //   stripe.createPaymentMethod({
+    //     type: 'card',
+    //     card: cardElement,
+    //     billing_details: {
+    //       amount: total,
+    //       shipping: {
+    //         name: recipientFirstName + recipientLastName,
+    //         address: {
+    //           ...billingAddress
+    //         }
+    //       }
+    //     }
+    //   }).then(({ paymentMethod }) => {
+    //     console.log("Card Number Ref", inputRef)
+    //     stripe.confirmCardPayment(clientSecret, {
+    //       payment_method: cardElement
+    //     })
+    //       .then(({ paymentIntent }) => {
+    //         const configOrder = {
+    //           orderTotal: total,
+    //           orderItems: cartItems.map(item => {
+    //             const { id, image, title,
+    //               price, quantity } = item;
+
+    //             return {
+    //               id,
+    //               image,
+    //               title,
+    //               price,
+    //               quantity
+    //             };
+    //           })
+    //         }
+    //       });
+    //   })
+    // });
+    const configOrder = {
+      orderTotal: total,
+      orderItems: cartItems.map(item => {
+        const { id, image, title, price, quantity } = item;
+        return { id, image, title, price, quantity }
       }
-    }).then(({ data: clientSecret }) => {
-
-      stripe.createPaymentMethod({
-        type: 'card',
-        card: cardElement,
-        billing_details: {
-          amount: total,
-          shipping: {
-            name: recipientFirstName + recipientLastName,
-            address: {
-              ...billingAddress
-            }
-          }
-        }
-      }).then(({ paymentMethod }) => {
-        console.log("Card Number Ref", inputRef)
-        stripe.confirmCardPayment(clientSecret, {
-          payment_method: cardElement
-        })
-          .then(({ paymentIntent }) => {
-            const configOrder = {
-              orderTotal: total,
-              orderItems: cartItems.map(item => {
-                const { id, image, title,
-                  price, quantity } = item;
-
-                return {
-                  id,
-                  image,
-                  title,
-                  price,
-                  quantity
-                };
-              })
-            }
-          });
-      })
-    });
+      )
+    };
+    dispatch(
+      saveOrderHistory(configOrder)
+    );
   }
 
   const configCardElement = {
@@ -270,9 +283,9 @@ export default function ShipmentAddress() {
                   <input type="radio" />
                   <label className="method-label">Debit / Credit Card</label>
                 </div> */}
-                <CardElement
+                {/* <CardElement
                   options={configCardElement}
-                />
+                /> */}
               </div>
             </div>
             <div className="product-wrap">

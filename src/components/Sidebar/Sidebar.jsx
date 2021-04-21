@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import "./Sidebar.scss";
+import { Link } from 'react-router-dom';
 
 export default function Sidebar({ isSidebar }) {
   return (
@@ -34,9 +35,9 @@ export default function Sidebar({ isSidebar }) {
         </div>
         <ul className="orders">
           <li className="navigation-item order">
-            <a href="#" className="order-navigation-link">
+            <Link className="order-navigation-link" to="/orders">
               Past Orders
-            </a>
+            </Link>
           </li>
           <li className="navigation-item">
             <a href="#" className="order-navigation-link">

@@ -5,11 +5,13 @@ import productReducer from './Products/prodcuts.reducer';
 
 import userReducer from './User/user.reducer';
 import cartReducer from './Cart/cart.reducer';
+import orderReducer from './Orders/orders.reducer';
 
 export const rootReducer = combineReducers({
   user: userReducer,
   productsData: productReducer,
-  cartData: cartReducer
+  cartData: cartReducer,
+  orderData: orderReducer
 });
 
 

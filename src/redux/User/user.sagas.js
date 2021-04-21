@@ -8,7 +8,6 @@ export function* getSnapshotFromUserAuth(user, additionalData = {}) {
   try {
     const userRef = yield call(handelUserProfile, { userAuth: user, additionalData });
     const snapshot = yield userRef.get();
-    console.log(snapshot.data);
     yield put(
       signInSuccess({
         id: snapshot.id,
@@ -35,11 +34,9 @@ export function* onCheckUserSession() {
 }
 
 export function* googleSignIn() {
-  console.log("In Google Sign In")
   try {
     const { user } = yield auth.signInWithPopup(GoogleProvider);
     yield getSnapshotFromUserAuth(user);
-
   } catch (err) {
     console.log(err);
   }

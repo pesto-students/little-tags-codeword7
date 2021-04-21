@@ -1,7 +1,7 @@
 import { put, takeLatest, all, call } from "@redux-saga/core/effects";
 import productTypes from "./prodcuts.type";
-import { handleFetchProducts } from './products.helper';
-import { setProducts } from './products.action';
+import { handleFetchProducts, handleFetchProduct } from './products.helper';
+import { setProducts, setProduct } from './products.action';
 
 export function* fetchProducts({ payload }) {
     try {
@@ -10,7 +10,7 @@ export function* fetchProducts({ payload }) {
         yield put(
             setProducts(products)
         )
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     }
 }
@@ -19,8 +19,24 @@ export function* onFetchProductsStart() {
     yield takeLatest(productTypes.FETCH_PRODCUTS_START, fetchProducts);
 }
 
+export function* fetchProduct({ payload }) {
+    try {
+        const product = yield handleFetchProduct(payload);
+        yield put(
+            setProduct(product)
+        )
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export function* fetchProductStart() {
+    yield takeLatest(productTypes.FETCH_PRODUCT_START, fetchProduct)
+}
+
 export default function* productSagas() {
     yield all([
-        call(onFetchProductsStart)
+        call(onFetchProductsStart),
+        call(fetchProductStart)
     ])
 }

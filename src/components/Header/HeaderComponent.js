@@ -51,9 +51,13 @@ function HeaderComponent() {
 
         {currentUser &&
           [<div className='cartContainer'>
-            <FaShoppingCart className="login-icon" /><span className="login-title"><Link className="link" to="/cart">
-              Your Cart({totalNumberOfCartItem})
-          </Link></span>
+
+            <div>
+              <FaShoppingCart className="login-icon" /><span className="login-title"><Link className="link" to="/cart">
+                Your Cart({totalNumberOfCartItem})
+                </Link></span>
+            </div>
+
           </div>
           ]}
 
