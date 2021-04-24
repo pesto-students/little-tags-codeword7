@@ -1,6 +1,5 @@
 {
   "name": "little-tags",
-  "proxy": "http://127.0.0.1:4242",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
