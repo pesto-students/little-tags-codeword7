@@ -6,7 +6,7 @@ import { selectCartItems, selectCartTotal, selectCartItemsCount } from "../../re
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrderHistory } from '../../redux/Orders/orders.action';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+// import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { apiInstance } from '../../config/api';
 import { loadStripe } from '@stripe/stripe-js';
 const stripePromise = loadStripe('pk_test_RL2GR96Y8K0U9JkBXnks2v2v');
@@ -34,15 +34,14 @@ export default function ShipmentAddress() {
   const [contactNo, setContactNo] = useState('');
   const [emailId, setEmailId] = useState('');
   const { cartItems, total } = useSelector(mapState);
-  const stripe = useStripe();
-  const elements = useElements();
-  const inputRef = useRef(null);
+  // const stripe = useStripe();
+  // const elements = useElements();
+  // const inputRef = useRef(null);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleShipping = async (evt) => {
 
-    const stripe = await stripePromise;
     const { name, value } = evt.target;
     setBillingAddress({
       ...billingAddress,
@@ -51,6 +50,7 @@ export default function ShipmentAddress() {
   }
 
   const handleFormSubmit = async () => {
+    const stripe = await stripePromise;
 
     const checkoutData = cartItems.map((item) => {
       return {
@@ -64,26 +64,6 @@ export default function ShipmentAddress() {
         quantity: item.quantity
       }
     });
-
-    // const response = await fetch('/create-checkout-session', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(checkoutData)
-    // });
-
-    // const session = await response.json();
-    // const result = await stripe.redirectToCheckout({
-    //   sessionId: session.id,
-    // });
-
-    // if (result.error) {
-    //   console.log('Error', result.error.message)
-    // } else {
-    //   console.log('Result', result)
-    // }
-
     const configOrder = {
       orderTotal: total,
       orderItems: cartItems.map(item => {
@@ -95,6 +75,25 @@ export default function ShipmentAddress() {
     dispatch(
       saveOrderHistory(configOrder)
     );
+    const response = await fetch('/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(checkoutData)
+    });
+
+    const session = await response.json();
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.log('Error', result.error.message)
+    } else {
+      console.log('Result', result)
+    }
+
     history.push('/orderSuccess');
   }
 

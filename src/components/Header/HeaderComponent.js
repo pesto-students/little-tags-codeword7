@@ -20,16 +20,70 @@ const mapState = (state) => ({
   totalNumberOfCartItem: selectCartItemsCount(state)
 });
 
+const SearchBar = (props) => {
+  const { options, onInputChange } = props;
+  return (
+    <div className='SearchBar'>
+      <input type="text" placeholder="Search Products" className='SearchInput' onChange={onInputChange} />
+      <AiOutlineSearch className="search-icon" />
+      {
+        options.map((option, index) => {
+          return (
+            <input key={index} type="text" placeholder="Search Products" className='SearchInput' value={option.title} />
+          )
+        })
+      }
+    </div>
+  )
+}
+const defaultOptions = [
+  {
+    "_id": "1",
+    "title": "Nike Shoes",
+    "src": [
+      "https://picsum.photos/id/0/300/200",
+      "https://picsum.photos/id/1/300/200",
+      "https://picsum.photos/id/10/300/200",
+      "https://picsum.photos/id/100/300/200",
+    ],
+    "description": "Description of product",
+    "price": 23,
+    "size": ["xl", "xs", "s"],
+    "quantity": 10
+  },
+  {
+    "_id": "1",
+    "title": "Headset",
+    "src": [
+      "https://picsum.photos/id/0/300/200",
+      "https://picsum.photos/id/1/300/200",
+      "https://picsum.photos/id/10/300/200",
+      "https://picsum.photos/id/100/300/200",
+    ],
+    "description": "Description of product",
+    "price": 23,
+    "size": ["xl", "xs", "s"],
+    "quantity": 10
+  }
+];
+
 function HeaderComponent() {
   const [isSidebar, setIsSidebar] = useState(false);
   const [isLoginModal, setIsLoginModal] = useState(false);
   // const firebase = useContext(FirebaseContext);
+  const [options, setOptions] = useState([])
   const { currentUser, totalNumberOfCartItem } = useSelector(mapState);
   const dispatch = useDispatch();
 
   const signOut = () => {
     dispatch(signOutUserStart());
   }
+
+  const onInputChange = (event) => {
+    setOptions(defaultOptions.filter((option) => option.title.includes(event.target.value)))
+    //console.log(event.target.value)
+  }
+
   return (
     <header>
       <div className='ToolBar'>
@@ -43,10 +97,8 @@ function HeaderComponent() {
             Little Tags
                 </Link>
         </div>
-        <div className='SearchBar'>
-          <input type="text" placeholder="Search Products" className='SearchInput' />
-          <AiOutlineSearch className="search-icon" />
-        </div>
+
+        <SearchBar options={options} onInputChange={onInputChange} />
 
         {!currentUser &&
           [<div className='login' onClick={() => setIsLoginModal(!isLoginModal)}>
