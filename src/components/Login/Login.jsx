@@ -4,17 +4,17 @@ import { ImFacebook } from 'react-icons/im';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { GrFormClose } from 'react-icons/gr';
 import FirebaseContext from '../../config/Firebase/context';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { googleSignInStart } from '../../redux/User/user.actions';
 
-const mapState = ({ user }) => ({
-    currentUser: user.currentUser
-})
+// const mapState = ({ user }) => ({
+//     currentUser: user.currentUser
+// })
 
 const Login = ({ isLoginModal, setIsLoginModal }) => {
     const firebase = useContext(FirebaseContext);
     const dispatch = useDispatch();
-    const { currentUser } = useSelector(mapState);
+    // const { currentUser } = useSelector(mapState);
 
     const handleGoogleSignIn = () => {
         dispatch(googleSignInStart());

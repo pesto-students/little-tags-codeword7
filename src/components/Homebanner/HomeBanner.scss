@@ -32,6 +32,10 @@
   margin: 0;
 }
 
+.banner-wrapper {
+  display: flex;
+  flex-direction: row;
+}
 
 .discount-text {
   font-size: 5rem;
@@ -73,6 +77,7 @@
   color: black;
   font-family: 'Nunito';
   text-transform: uppercase;
+  flex-basis: 75%;
 }
 
 .for-text {
@@ -89,6 +94,49 @@
     font-weight: 700;
     margin-bottom: 0;
     margin-top: 0;
+}
+
+.right-banner-text {
+  text-transform: uppercase;
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  .new-arrival {
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    font-weight: 300;
+  }
+  .just-text {
+    font-family: 'Rubik', sans-serif;
+    font-size: 6rem;
+    letter-spacing: 0.2rem;
+    font-weight: bold;
+  }
+  .for-space {
+    letter-spacing: 0.1rem;
+  }
+  .you-text {
+    font-family: 'Allura', cursive;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+  }
+}
+.banner-shop-now {
+  margin-top: 2rem;
+  width: 20rem;
+  padding: 1rem 1rem;
+  font-size: 1.5rem;
+  font-family: 'Nunito';
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  color: white;
+  background-color: black;
+  letter-spacing: 0.2rem;
 }
 
 @media (min-width: 40rem) {

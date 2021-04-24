@@ -89,7 +89,7 @@ function HeaderComponent() {
       <div className='ToolBar'>
         <DrawerToggle isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
         <div className="main-sidebar">
-          <Sidebar isSidebar={isSidebar} />
+          <Sidebar isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
         </div>
 
         <div className='logo'>
@@ -116,8 +116,8 @@ function HeaderComponent() {
                 Your Cart ({totalNumberOfCartItem})
                 </Link></span>
             </div>
-            <div className='login-item'>
-              <BiLogOut className="login-icon" onClick={() => signOut()} /><span className="login-title">Logout</span>
+            <div className='login-item' onClick={() => signOut()}>
+              <BiLogOut className="login-icon" /><span className="login-title">Logout</span>
             </div>
           </div>
           ]}

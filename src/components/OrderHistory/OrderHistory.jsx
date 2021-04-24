@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrderHistory } from '../../redux/Orders/orders.action';
-import orderSagas from '../../redux/Orders/orders.sagas';
+// import orderSagas from '../../redux/Orders/orders.sagas';
 import './OrderHistory.scss';
 import moment from 'moment';
 

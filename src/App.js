@@ -17,6 +17,7 @@ import DashboardLayout from './layout/DashboardLayout/DashboardLayout';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { publishableKey } from './config/StripeConfig';
+import  ScrollToTop  from './components/ScrollToTop/ScrollToTop';
 
 const stripePromise = loadStripe(publishableKey);
 
@@ -31,6 +32,7 @@ const App = () => {
     // <Dashboard />
     <div className="main-app">
       <BrowserRouter>
+      <ScrollToTop />
         <Switch>
           <Route exact path={ROUTES.DASHBOARD}>
             <DashboardLayout>
