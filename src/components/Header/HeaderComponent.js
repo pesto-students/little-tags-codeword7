@@ -35,7 +35,7 @@ function HeaderComponent() {
       <div className='ToolBar'>
         <DrawerToggle isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
         <div className="main-sidebar">
-          <Sidebar isSidebar={isSidebar} />
+          <Sidebar isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
         </div>
 
         <div className='logo'>

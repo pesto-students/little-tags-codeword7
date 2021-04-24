@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import Product from "../Product/Product";
 import "./ProductCategory.scss";
 import { useDispatch } from "react-redux";
@@ -13,7 +12,6 @@ const mapState = ({ productsData }) => ({
 })
 
 export default function ProductCategory() {
-  const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const { filterType } = useParams();
   console.log("In Main Component", filterType);

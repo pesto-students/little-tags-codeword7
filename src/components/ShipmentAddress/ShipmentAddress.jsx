@@ -1,13 +1,11 @@
 import "./ShipmentAddress.scss";
 import FormInput from '../../UI/FormInput/FormInput';
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { createStructuredSelector } from "reselect";
 import { selectCartItems, selectCartTotal, selectCartItemsCount } from "../../redux/Cart/cart.selector";
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrderHistory } from '../../redux/Orders/orders.action';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { apiInstance } from '../../config/api';
 import { loadStripe } from '@stripe/stripe-js';
 const stripePromise = loadStripe('pk_test_RL2GR96Y8K0U9JkBXnks2v2v');
 
@@ -34,9 +32,6 @@ export default function ShipmentAddress() {
   const [contactNo, setContactNo] = useState('');
   const [emailId, setEmailId] = useState('');
   const { cartItems, total } = useSelector(mapState);
-  const stripe = useStripe();
-  const elements = useElements();
-  const inputRef = useRef(null);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -86,6 +81,7 @@ export default function ShipmentAddress() {
 
     const configOrder = {
       orderTotal: total,
+      userName: recipientFirstName + recipientLastName,
       orderItems: cartItems.map(item => {
         const { id, image, title, price, quantity } = item;
         return { id, image, title, price, quantity }

@@ -1,7 +1,7 @@
 import './App.css';
 import Dashboard from './components/Dashboard/Dashboard';
 import * as ROUTES from './constants/routes';
-import { BrowserRouter, Switch, Route, applyRouterMiddleware } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
 import withAuthenticaton from './hoc/withAuthentication';
 import { useDispatch } from 'react-redux';
@@ -17,7 +17,7 @@ import DashboardLayout from './layout/DashboardLayout/DashboardLayout';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { publishableKey } from './config/StripeConfig';
-import useScroll from 'react-router-scroll';
+import  ScrollToTop  from './components/ScrollToTop/ScrollToTop';
 
 const stripePromise = loadStripe(publishableKey);
 
@@ -32,6 +32,7 @@ const App = () => {
     // <Dashboard />
     <div className="main-app">
       <BrowserRouter>
+      <ScrollToTop />
         <Switch>
           <Route exact path={ROUTES.DASHBOARD}>
             <DashboardLayout>
