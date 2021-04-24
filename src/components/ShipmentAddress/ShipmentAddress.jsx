@@ -71,7 +71,7 @@ export default function ShipmentAddress() {
     dispatch(
       saveOrderHistory(configOrder)
     );
-    const response = await fetch('/create-checkout-session', {
+    const response = await fetch('https://stripe-api-ecom.herokuapp.com/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
