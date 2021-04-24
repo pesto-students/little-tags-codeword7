@@ -237,40 +237,14 @@ export default function ShipmentAddress() {
                   <div className="checkout-product-value">Free</div>
                 </div>
                 <div className="checkout-total">
-                  <div className="checkout-total-title">Discount</div>
-                  <div className="checkout-product-value">-500</div>
-                </div>
-                <div className="checkout-total">
                   <div className="checkout-total-title">Total</div>
                   <div className="checkout-product-value total-checkout-price">
-                    {total - 500}
+                    {total}
                   </div>
                 </div>
               </div>
             </div>
-            <div className="product-wrap">
-              <div className="payment-methods">
-                {/* <div className="payment-method">
-                  <input type="radio" />
-                  <label className="method-label">Paytm</label>
-                </div>
-                <div className="payment-method">
-                  <input type="radio" />
-                  <label className="method-label">BHIM UPI</label>
-                </div>
-                <div className="payment-method">
-                  <input type="radio" />
-                  <label className="method-label">CCAvenue</label>
-                </div>
-                <div className="payment-method">
-                  <input type="radio" />
-                  <label className="method-label">Debit / Credit Card</label>
-                </div> */}
-                {/* <CardElement
-                  options={configCardElement}
-                /> */}
-              </div>
-            </div>
+
             <div className="product-wrap">
               <div className="product-checkout-btn" onClick={handleFormSubmit}>
                 <button className="payment-checkout-button">Place Order</button>

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function Sidebar({ isSidebar }) {
   return (
     <div className={isSidebar ? 'openSidebar' : 'closeSidebar'}>
-      <div className="greeting">Hey Mihir</div>
+      {/* <div className="greeting">Hey Mihir</div> */}
       <div className="category-list">
         <div className="menu">
           <div className="category">Categories</div>
@@ -33,7 +33,10 @@ export default function Sidebar({ isSidebar }) {
             </li>
           </ul>
         </div>
+        <hr className="sidebar-hr" />
+
         <ul className="orders">
+          <div className="category my-account">My Account</div>
           <li className="navigation-item order">
             <Link className="order-navigation-link" to="/orders">
               Past Orders

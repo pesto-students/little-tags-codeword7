@@ -32,7 +32,10 @@ export default function ProductCategory() {
 
   return (
     <div className="product-category-wrapper">
-      <h3 className="products-main-header">{filterType}</h3>
+      <h3 className="products-main-header">
+        {filterType && filterType}
+        {!filterType && "New Arrival"}
+      </h3>
       <div className="product-cards">
         {products.map((product, pos) => {
           const configProduct = {

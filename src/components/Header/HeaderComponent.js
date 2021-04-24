@@ -64,8 +64,8 @@ function HeaderComponent() {
                 Your Cart ({totalNumberOfCartItem})
                 </Link></span>
             </div>
-            <div className='login-item'>
-              <BiLogOut className="login-icon" onClick={() => signOut()} /><span className="login-title">Logout</span>
+            <div className='login-item' onClick={() => signOut()}>
+              <BiLogOut className="login-icon" /><span className="login-title">Logout</span>
             </div>
           </div>
           ]}

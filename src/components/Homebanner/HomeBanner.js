@@ -11,11 +11,24 @@ const HomeBanner = () => (
             Shop Now
           </Link></button>
     </div> */}
-    <div>
+    <div className="banner-wrapper">
       <div className="left-banner-text">
         <div><p className="for-text">For</p><p className="online-text"> ONLINE </p><p className="for-text"> ORDER</p></div>
         <div className="discount-horizontal">
           <div className="discount-text"><p className="">30% </p><p>OFF</p></div>
+        </div>
+      </div>
+      <div className="right-banner-text">
+        <div className="new-arrival">New Arrivals</div>
+        <div>
+          <p className="just-text">Just</p>
+          <p className="just-text for-space">For</p>
+          <p className="just-text for-space">You</p>
+        </div>
+        <div>
+          <button className="banner-shop-now"><Link className="link" to="/products">
+            Shop Now
+          </Link></button>
         </div>
       </div>
     </div>
