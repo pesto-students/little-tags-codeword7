@@ -19,6 +19,7 @@ export default function ProductCategory() {
 
   useEffect(() => {
     dispatch(fetchProductsStart({ filterType }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterType]);
 
   if (!Array.isArray(products)) return null;

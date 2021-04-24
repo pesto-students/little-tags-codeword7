@@ -15,10 +15,10 @@ function ProductDesc() {
   const { productID } = useParams();
   const { product } = useSelector(mapState);
 
-  const { sliderImages,image,  size, title, price, description } = product;
+  const { sliderImages, image, size, title, price, description } = product;
   // eslint-disable-next-line
   useEffect(() => {
-    
+
     dispatch(
       fetchProductStart(productID)
     );
@@ -26,6 +26,7 @@ function ProductDesc() {
     return () => {
       setProduct({})
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // const [index, setIndex] = useState(0);
@@ -45,7 +46,7 @@ function ProductDesc() {
     images[index].className = "active";
   };
 
-  if(product 
+  if (product
     && Object.keys(product).length === 0 && product.constructor === Object) return null;
 
   return (
@@ -61,26 +62,26 @@ function ProductDesc() {
             <span>₹{price}</span>
           </div>
           <div className="colors">
-                {
-                  size.map((itemSize, index) => (
-                    <button key={index}>{itemSize}</button>
-                  ))
-                }
-              </div>
+            {
+              size.map((itemSize, index) => (
+                <button key={index}>{itemSize}</button>
+              ))
+            }
+          </div>
 
           <p>{description}</p>
           {/* <p>{item.content}</p> */}
 
           {/* <DetailsThumb images={item.src} tab={handleTab} myRef={myRef} /> */}
           <div className="thumb" ref={myRef}>
-                {
-                  sliderImages.map((img, index) => (
-                    <img src={img} alt="" key={index}
-                      onClick={() => handleTab(index)}
-                    />
-                  ))
-                }
-              </div>
+            {
+              sliderImages.map((img, index) => (
+                <img src={img} alt="" key={index}
+                  onClick={() => handleTab(index)}
+                />
+              ))
+            }
+          </div>
           <button className="cart">Add to cart</button>
 
         </div>

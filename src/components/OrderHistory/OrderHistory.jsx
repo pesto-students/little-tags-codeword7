@@ -19,7 +19,7 @@ const OrderHistory = () => {
         dispatch(
             getOrderHistory(currentUser)
         );
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const formatText = (orderDate) => {
