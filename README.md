@@ -77,3 +77,13 @@ You are allowed to use static data or any other third party api for fetching dat
 
 
 Note: Your design for project should not be replica of ☝️ demos. these links are provided for inspiration purpose only.
+
+var firebaseConfig = {
+    apiKey: "AIzaSyCV64OnLuCNKC6iUAaBjqGSJU0BdfdNCp8",
+    authDomain: "ecom-project-eff13.firebaseapp.com",
+    projectId: "ecom-project-eff13",
+    storageBucket: "ecom-project-eff13.appspot.com",
+    messagingSenderId: "15167364951",
+    appId: "1:15167364951:web:40c4b0e6c02278e912e812",
+    measurementId: "G-0DMKNMS44V"
+  };

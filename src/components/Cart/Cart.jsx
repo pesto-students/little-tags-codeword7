@@ -1,71 +1,98 @@
 import "./Cart.scss";
 import { BiPlus, BiMinus } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { createStructuredSelector } from 'reselect';
+import { selectCartItems, selectCartTotal } from '../../redux/Cart/cart.selector';
+import { addProduct, reduceCartProduct, removeCartProduct } from '../../redux/Cart/cart.action';
+import { useHistory } from "react-router";
+
+const mapState = createStructuredSelector({
+  cartItems: selectCartItems,
+  total: selectCartTotal
+})
 
 export default function Cart() {
+
+  const dispatch = useDispatch();
+  const { cartItems, total } = useSelector(mapState);
+  const errMsg = 'You have no items in your cart.';
+  const history = useHistory();
+
+  const addCartItem = (product) => {
+    dispatch(
+      addProduct(product)
+    );
+  }
+
+  const reduceCartItem = (product) => {
+    dispatch(
+      reduceCartProduct(product)
+    );
+  }
+
+  const removeCartItem = (product) => {
+    dispatch(
+      removeCartProduct(product)
+    );
+  }
+
   return (
     <div className="wrapper">
-      <h3 className="bag-heading">Your Bag (3 Items)</h3>
-      <div className="main-bag">
-        <div className="cart-item">
-          <div className="bag-item">
-            <img
-              src="https://syncspider.com/wp-content/uploads/2019/07/1keagan-henman-xPJYL0l5Ii8-unsplash-e1562931127955.jpg"
-              alt=""
-              className="item-img"
-            />
-            <h6 className="item-title">Drench & quence Serum</h6>
-            <div className="quantity">
-              <div className="item-qty">
-                <BiMinus />
-                <div>2</div>
-                <BiPlus />
+      <h3 className="bag-heading">Your Bag ({cartItems.length} Items)</h3>
+      {cartItems.length > 0 ? (
+        <div className="main-bag">
+          <div className="cart-item">
+            {cartItems.map((item, pos) => {
+              return (
+                <div className="bag-item">
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="item-img"
+                  />
+                  <h6 className="item-title">{item.title}</h6>
+                  <div className="quantity">
+                    <div className="item-qty">
+                      <BiMinus onClick={() => reduceCartItem(item)} />
+                      <div>{item.quantity}</div>
+                      <BiPlus onClick={() => addCartItem(item)} />
+                    </div>
+                  </div>
+                  <div className="remove-item">
+                    <div className="remove" onClick={() => removeCartItem(item)}>Remove</div>
+                  </div>
+                </div>
+              )
+            })}
+            <div className="cart-line-2"></div>
+          </div>
+          <div>
+            <div className="checkout-wrapper">
+              <div className="sub-total">
+                <div className="cart-item-title">Subtotal:</div>
+                <div className="cart-item-price">{total}</div>
+              </div>
+              <div className="shipping">
+                <div className="cart-item-title">Shipping:</div>
+                <div className="cart-item-price">Free</div>
+              </div>
+              <div className="cart-line-1"></div>
+              <div className="grand-total">
+                <div className="cart-item-title">Grand Total:</div>
+                <div className="cart-item-price">{total}</div>
               </div>
             </div>
-            <div className="remove-item">
-              <div className="remove">Remove</div>
+            <div className="checkout-btn">
+              <button className="checkout-button" onClick={() => history.push('/payment')}>Checkout</button>
             </div>
-          </div>
-          <div className="bag-item">
-            <img
-              src="https://syncspider.com/wp-content/uploads/2019/07/1keagan-henman-xPJYL0l5Ii8-unsplash-e1562931127955.jpg"
-              alt=""
-              className="item-img"
-            />
-            <h6 className="item-title">Drench & quence Serum</h6>
-            <div className="quantity">
-              <div className="item-qty">
-                <BiMinus />
-                <div>2</div>
-                <BiPlus />
-              </div>
-            </div>
-            <div className="remove-item">
-              <div className="remove">Remove</div>
-            </div>
-          </div>
-          <div className="cart-line-2"></div>
-        </div>
-        <div>
-          <div className="checkout-wrapper">
-            <div className="sub-total">
-              <div className="cart-item-title">Subtotal:</div>
-              <div className="cart-item-price">500$</div>
-            </div>
-            <div className="shipping">
-              <div className="cart-item-title">Shipping:</div>
-              <div className="cart-item-price">Free</div>
-            </div>
-            <div className="cart-line-1"></div>
-            <div className="grand-total">
-              <div className="cart-item-title">Grand Total:</div>
-              <div className="cart-item-price">800$</div>
-            </div>
-          </div>
-          <div className="checkout-btn">
-            <button className="checkout-button">Checkout</button>
           </div>
         </div>
-      </div>
+      ) : (
+        <p>
+          {errMsg}
+        </p>
+      )}
+
     </div>
   );
 }

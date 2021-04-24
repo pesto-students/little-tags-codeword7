@@ -1,0 +1,8 @@
+const productTypes = {
+    FETCH_PRODCUTS_START: 'FETCH_PRODCUTS_START',
+    SET_PRODUCTS: 'SET_PRODUCTS',
+    FETCH_PRODUCT_START: 'FETCH_PRODUCT_START',
+    SET_PRODUCT: 'SET_PRODUCT'
+}
+
+export default productTypes;

@@ -1,15 +1,19 @@
 .bag-heading {
   text-align: center;
-  font-family: 'Nunito';
-  letter-spacing: 0.1rem;
-  font-weight: 600;
-  font-size: 2rem;
-  margin: 0;
-  padding: 0;
+    font-family: 'Nunito';
+    letter-spacing: 0.1rem;
+    font-weight: 600;
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 5rem;
+    font-size: 4rem;
 }
 .wrapper {
     padding: 2rem;
     box-sizing: border-box;
+    background-color: white;
+    color: black;
 }
 .main-bag {
   display: grid;
@@ -18,6 +22,8 @@
   grid-row: auto;
   grid-column-gap: 5rem;
   // position: relative;
+  // display: flex;
+  // flex-wrap: nowrap;
 }
 .bag-item {
   grid-column: 1 / 2; 
@@ -51,20 +57,20 @@
 }
 .item-img {
   grid-column: 1 / 2;
-  width: 90%;
+  width: 60%;
   object-fit: cover;
 }
 .item-title {
-  grid-column: 2 / 3;
-  display: grid;
-  align-items: center;
-  padding: 1rem;
-  font-size: 2ch;
-  font-weight: 400;
-  letter-spacing: 0.1rem;
-  font-size: 1rem;
-  box-sizing: border-box;
-  margin: 1rem;
+    grid-column: 2 / 3;
+    display: grid;
+    align-items: center;
+    padding: 1.5rem;
+    font-size: 2ch;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    font-size: 1.5rem;
+    box-sizing: border-box;
+    margin: 1rem;
 }
 .remove-item {
   grid-column: 4 / 5;
@@ -73,12 +79,12 @@
 }
 .item-qty {
   display: flex;
-  justify-content: space-around;
-  border: 1px solid grey;
-  padding: 0.5rem;
-  width: 100%;
-  margin: 0 1rem 0 1rem;
-  padding: .3rem 0;
+    justify-content: space-around;
+    border: 1px solid grey;
+    padding: 0.5rem;
+    width: 100%;
+    margin: 0 2rem 0 2rem;
+    padding: 0.8rem 0;
 }
 .quantity {
   // grid-column: 3 / 4;
@@ -99,7 +105,7 @@
 .shipping {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 .cart-line-1{
     width: 100%;
@@ -119,16 +125,16 @@
   margin-top: 2rem;
 }
 .cart-item-title {
-  font-size: 1rem;
-  font-weight: 400;
-  font-family: 'Nunito';
-  letter-spacing: 0.1rem
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-family: 'Nunito';
+    letter-spacing: 0.1rem;
 }
 .cart-item-price {
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: 'Nunito';
-  letter-spacing: 0.1rem
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: 'Nunito';
+    letter-spacing: 0.1rem;
 }
 .checkout-btn {
   margin-top: 2rem;
@@ -136,18 +142,18 @@
 }
 .checkout-button {
   width: 100%;
-    padding: 0.8rem 0;
-    font-size: 1rem;
-    font-family: 'Nunito';
-    letter-spacing: 0.1rem;
-    font-weight: 700;
-    outline: none;
-    background-color: black;
-    color: white;
-    border: none;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all .5s;
+  padding: 1.2rem 0;
+  font-size: 1.5rem;
+  font-family: 'Nunito';
+  letter-spacing: 0.1rem;
+  font-weight: 700;
+  outline: none;
+  background-color: black;
+  color: white;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .5s;
 }
 .checkout-button:hover {
   background-color: #9dc5c3;
@@ -158,4 +164,5 @@
   font-family: 'Nunito';
   letter-spacing: 1px;
   text-decoration: underline;
+  font-size: 1.2rem;
 }
