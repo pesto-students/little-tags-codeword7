@@ -18,6 +18,7 @@ const Login = ({ isLoginModal, setIsLoginModal }) => {
 
     const handleGoogleSignIn = () => {
         dispatch(googleSignInStart());
+        setIsLoginModal(false);
     }
 
     const doFacebookSignIn = () => {

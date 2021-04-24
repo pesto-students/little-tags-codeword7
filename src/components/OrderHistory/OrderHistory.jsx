@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOrderHistory } from '../../redux/Orders/orders.action';
 import orderSagas from '../../redux/Orders/orders.sagas';
+import './OrderHistory.scss';
+import moment from 'moment';
 
 const mapState = ({ user, orderData }) => ({
     currentUser: user.currentUser,
@@ -20,19 +22,34 @@ const OrderHistory = () => {
 
     }, []);
 
+    const formatText = (orderDate) => {
+        return moment(orderDate.nano).format('DD/MM/YY');
+    }
+
     return (
-        <div>
-            <div>
+        <div className="order-history-main">
+            <div className="order-history-header">
                 <h2>Order History</h2>
             </div>
-            <div>
-                {(Array.isArray(orderHistory) && orderSagas.length > 0) && orderHistory.map((order, pos) => (
-                    <div>
-                        <div>{order.documentID}</div>
-                        <div>{order.createdDate}</div>
-                        <div>{order.total}</div>
-                    </div>
-                ))}
+            {console.log(orderHistory)}
+            <div className="order-col">
+                <div className="order-row">
+                    <div className="order-heading">Order ID</div>
+                    <div className="order-heading">Order Date</div>
+                    <div className="order-heading">Order Total</div>
+                </div>
+                {(Array.isArray(orderHistory) && orderHistory.length > 0) && orderHistory.map((order, pos) => {
+                    const { documentID, orderCreatedDate, orderTotal } = order;
+                    const orderDate = formatText(orderCreatedDate)
+                    return (
+
+                        <div className="order-row">
+                            <div className="order-id">{documentID}</div>
+                            <div>{orderDate}</div>
+                            <div>{orderTotal}</div>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     )

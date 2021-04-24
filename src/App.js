@@ -11,6 +11,9 @@ import ProductCategory from './components/ProductCategory/ProductCategory';
 import MainLayout from './layout/MainLayout';
 import ShipmentAddress from './components/ShipmentAddress/ShipmentAddress';
 import ProductDesc from './components/ProductDesc/ProductDesc';
+import OrderHistory from './components/OrderHistory/OrderHistory';
+import OrderSuccessConfirmation from './components/OrderSuccessConfirmation/OrderSuccessConfirmation';
+import DashboardLayout from './layout/DashboardLayout/DashboardLayout';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { publishableKey } from './config/StripeConfig';
@@ -30,9 +33,9 @@ const App = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path={ROUTES.DASHBOARD}>
-            <MainLayout>
+            <DashboardLayout>
               <Dashboard />
-            </MainLayout>
+            </DashboardLayout>
           </Route>
           <Route path={ROUTES.CART}>
             <MainLayout>
@@ -63,7 +66,12 @@ const App = () => {
           </Route>
           <Route path={ROUTES.ORDERS}>
             <MainLayout>
-              <ProductDesc />
+              <OrderHistory />
+            </MainLayout>
+          </Route>
+          <Route path={ROUTES.ORDER_SUCCESS}>
+            <MainLayout>
+              <OrderSuccessConfirmation />
             </MainLayout>
           </Route>
         </Switch>

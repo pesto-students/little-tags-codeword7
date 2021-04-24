@@ -12,6 +12,11 @@ const orderReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 orderHistory: action.payload
             }
+        case orderTypes.SET_ORDER_DETAIL:
+            return {
+                ...state,
+                orderDetails: action.payload
+            }
         default:
             return state;
     }

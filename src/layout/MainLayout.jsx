@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/Header/HeaderComponent';
 import Footer from '../components/Footer/Footer';
+import './MainLayout.scss';
 
 const MainLayout = props => {
     return (

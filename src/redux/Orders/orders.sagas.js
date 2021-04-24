@@ -1,9 +1,9 @@
 import orderTypes from './orders.type';
 import { takeLatest, put, call, all } from 'redux-saga/effects';
 import { auth } from '../../config/Firebase/util';
-import { handleSaveOrder, handleGetOrderHistory } from './orders.helper';
+import { handleSaveOrder, handleGetOrderHistory, handleGetOrder } from './orders.helper';
 import { clearCart } from '../Cart/cart.action';
-import { setOrderHistory } from './orders.action';
+import { setOrderDetail, setOrderHistory } from './orders.action';
 
 export function* saveOrder({ payload }) {
     console.log("In order Saga", { ...payload });
@@ -42,9 +42,26 @@ export function* onGetOrderHistoryStart() {
     yield takeLatest(orderTypes.GET_USER_ORDER_HISTORY_START, getOrderHistory)
 }
 
+export function* getOrderDetail({ payload }) {
+    try {
+        const order = yield handleGetOrder(payload);
+
+        yield put(
+            setOrderDetail(order)
+        )
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export function* onGetOrderDetailStart() {
+    yield takeLatest(orderTypes.GET_ORDER_DETAIL_START, getOrderDetail)
+}
+
 
 export default function* orderSagas() {
     yield all([
-        call(onSaveOrderHistoryStart)
+        call(onSaveOrderHistoryStart),
+        call(onGetOrderHistoryStart)
     ])
 }

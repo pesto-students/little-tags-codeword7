@@ -13,4 +13,14 @@ export const getOrderHistory = uid => ({
 export const setOrderHistory = history => ({
     type: orderTypes.SET_ORDER_HISTORY,
     payload: history
+});
+
+export const getOrderDetailStart = orderID => ({
+    type: orderTypes.GET_ORDER_DETAIL_START,
+    payload: orderID
+});
+
+export const setOrderDetail = order => ({
+    type: orderTypes.SET_ORDER_DETAIL,
+    payload: order
 })

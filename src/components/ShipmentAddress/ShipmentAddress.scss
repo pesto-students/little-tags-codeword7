@@ -5,7 +5,6 @@
     column-gap: 2rem;
     flex-wrap: wrap;
     background-color: white;
-    margin-top: 8rem;
     padding: 5rem;
 }
 .address{
@@ -200,10 +199,15 @@
   font-size: 13px;
     margin-left: 0.6rem;
 }
-.checkout-button {
-  width: 15rem;
-  padding: 0.7rem 0.5rem;
-  cursor: pointer;
+.payment-checkout-button {
+  width: 20rem;
+    padding: 1.4rem 0.5rem;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
 }
 .product-checkout-btn {
     margin-top: 2rem;

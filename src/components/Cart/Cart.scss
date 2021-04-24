@@ -6,13 +6,12 @@
     font-size: 2rem;
     margin: 0;
     padding: 0;
-    margin-bottom: 5rem
+    margin-bottom: 5rem;
+    font-size: 4rem;
 }
 .wrapper {
     padding: 2rem;
     box-sizing: border-box;
-    margin-top: 10rem;
-    margin-bottom: 10rem;
     background-color: white;
     color: black;
 }
@@ -58,7 +57,7 @@
 }
 .item-img {
   grid-column: 1 / 2;
-  width: 90%;
+  width: 60%;
   object-fit: cover;
 }
 .item-title {

@@ -6,10 +6,14 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
 import Sidebar from '../Sidebar/Sidebar';
 import Login from '../Login/Login';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItemsCount } from '../../redux/Cart/cart.selector';
+import { FaUser } from 'react-icons/fa';
+import { BiLogOut } from 'react-icons/bi';
 // import FirebaseContext from '../../Config/Firebase/context';
 import { Link } from 'react-router-dom';
+// import { signOutUser } from '../../redux/User/user.sagas';
+import { signOutUserStart } from '../../redux/User/user.actions';
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -21,6 +25,11 @@ function HeaderComponent() {
   const [isLoginModal, setIsLoginModal] = useState(false);
   // const firebase = useContext(FirebaseContext);
   const { currentUser, totalNumberOfCartItem } = useSelector(mapState);
+  const dispatch = useDispatch();
+
+  const signOut = () => {
+    dispatch(signOutUserStart());
+  }
   return (
     <header>
       <div className='ToolBar'>
@@ -30,34 +39,34 @@ function HeaderComponent() {
         </div>
 
         <div className='logo'>
-          Little Tags
+          <Link className="link" to="/">
+            Little Tags
+                </Link>
         </div>
         <div className='SearchBar'>
           <input type="text" placeholder="Search Products" className='SearchInput' />
           <AiOutlineSearch className="search-icon" />
         </div>
 
-        {currentUser &&
-          [<div className='login'>
-            <BiLogIn className="login-icon" /><span className="login-title">{currentUser.displayName}</span>
-          </div>
-          ]}
-
         {!currentUser &&
           [<div className='login' onClick={() => setIsLoginModal(!isLoginModal)}>
-            <BiLogIn className="login-icon" /><span className="login-title">Login / Sign Up</span>
+            <BiLogIn className="login-user-icon" /><span className="login-header-title">Login</span>
           </div>
           ]}
 
         {currentUser &&
           [<div className='cartContainer'>
-
-            <div>
-              <FaShoppingCart className="login-icon" /><span className="login-title"><Link className="link" to="/cart">
-                Your Cart({totalNumberOfCartItem})
+            <div className='login-item'>
+              <FaUser className="login-icon" /><span className="login-title">{currentUser.displayName}</span>
+            </div>
+            <div className='login-item'>
+              <FaShoppingCart className="login-icon header-cart-icon" /><span ><Link className="header-cart-icon" to="/cart">
+                Your Cart ({totalNumberOfCartItem})
                 </Link></span>
             </div>
-
+            <div className='login-item'>
+              <BiLogOut className="login-icon" onClick={() => signOut()} /><span className="login-title">Logout</span>
+            </div>
           </div>
           ]}
 

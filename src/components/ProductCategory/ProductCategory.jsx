@@ -18,21 +18,21 @@ export default function ProductCategory() {
   const { filterType } = useParams();
   console.log("In Main Component", filterType);
   const { products } = useSelector(mapState);
-  
+
   useEffect(() => {
-      dispatch(fetchProductsStart({filterType}))
+    dispatch(fetchProductsStart({ filterType }))
   }, [filterType]);
 
-  if(!Array.isArray(products)) return null;
-  if(products.length < 1) {
-      return (
-        <div>No Search Results</div>
-      )
+  if (!Array.isArray(products)) return null;
+  if (products.length < 1) {
+    return (
+      <div>No Search Results</div>
+    )
   }
 
   return (
     <div className="product-category-wrapper">
-      <h3 className="products-main-header">New Arrivals</h3>
+      <h3 className="products-main-header">{filterType}</h3>
       <div className="product-cards">
         {products.map((product, pos) => {
           const configProduct = {

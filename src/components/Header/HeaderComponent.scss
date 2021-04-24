@@ -29,21 +29,21 @@
 }
 
 .SearchBar {
-  width: 75%;
+  width: 40%;
   margin: auto;
   position: relative;
   
 }
 
-.login{
-    width: 15%;
-    display: none;
-    color: white;
-    text-align: center;
-  span {
-    cursor: pointer;
-  }
-}
+// .login{
+//     width: 15%;
+//     display: none;
+//     color: white;
+//     text-align: center;
+//   span {
+//     cursor: pointer;
+//   }
+// }
 
 @media (min-width: 40rem) {
   .logo {
@@ -51,14 +51,8 @@
   }
 
   .SearchBar {
-    width: 50%;
+    width: 40%;
     margin: 0;
-  }
-
-  .login {
-    margin-left: 1rem;
-    display: flex;
-    justify-content: center;
   }
 }
 
@@ -66,6 +60,9 @@
   color: white;
   display: flex;
   cursor: pointer;
+  margin-left: 5rem;
+  justify-content: space-between;
+  width: 40rem;
 }
 
 .SearchInput {
@@ -94,21 +91,53 @@
     right: 3rem;
     top: 1rem;
     font-size: 1.8rem;
+    
+}
+.login {
+  color: white;
+  flex-direction: row;
+  flex-grow: 1;
+  letter-spacing: 0.1rem;
+  font-size: 1.8rem;
+  margin-right: 10rem;
+  text-align: right;
+    font-family: 'Nunito';
+    letter-spacing: 0.2rem;
+    font-weight: 700;
+  
+}
+.login-item {
+    display: flex;
+    font-size: 1.8rem;
+}
+.login-icon {
+  margin-right: 1rem;
+}
+.login-user-icon {
+  margin-right: 1rem;
+  font-size: 2.5rem;
+}
+.header-cart-icon {
+  color: white;
+  text-decoration: none;
+}
+.login-header-title {
+  font-size: 2.5rem;
 }
 // .main-sidebar {
 //   transition: left 1s;
 // }
-.login-title {
-  padding-left: 0.5rem;
-  font-family: 'Nunito';
-    letter-spacing: 0.1rem;
-    font-size: 1.8rem;
+// .login-title {
+//   padding-left: 0.5rem;
+//   font-family: 'Nunito';
+//     letter-spacing: 0.1rem;
+//     font-size: 1.8rem;
 
-}
-.login-icon {
-  font-size: 2.3rem;
-}
-.link {
-  text-decoration: none;
-    color: white;
-}
+// }
+// .login-icon {
+//   font-size: 2.3rem;
+// }
+// .link {
+//   text-decoration: none;
+//     color: white;
+// }

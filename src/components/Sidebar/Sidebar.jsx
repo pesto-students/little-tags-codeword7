@@ -12,24 +12,24 @@ export default function Sidebar({ isSidebar }) {
           <div className="category">Categories</div>
           <ul className="category-name">
             <li className="navigation-item">
-              <a href="#" className="navigation-link">
-                Accessories
-              </a>
+              <Link className="navigation-link" to="/products/men clothing">
+                Men Clothing
+                </Link>
             </li>
             <li className="navigation-item">
-              <a href="#" className="navigation-link">
-                Shirts
-              </a>
+              <Link className="navigation-link" to="/products/women clothing">
+                Women's Clothing
+                </Link>
             </li>
             <li className="navigation-item">
-              <a href="#" className="navigation-link">
-                Pants
-              </a>
+              <Link className="navigation-link" to="/products/jewelery">
+                Jewlery
+                </Link>
             </li>
             <li className="navigation-item">
-              <a href="#" className="navigation-link">
-                Jackets
-              </a>
+              <Link className="navigation-link" to="/products/electronics">
+                Electronics
+                </Link>
             </li>
           </ul>
         </div>

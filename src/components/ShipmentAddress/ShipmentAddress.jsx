@@ -3,10 +3,13 @@ import FormInput from '../../UI/FormInput/FormInput';
 import React, { useState, useRef } from "react";
 import { createStructuredSelector } from "reselect";
 import { selectCartItems, selectCartTotal, selectCartItemsCount } from "../../redux/Cart/cart.selector";
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrderHistory } from '../../redux/Orders/orders.action';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { apiInstance } from '../../config/api';
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe('pk_test_RL2GR96Y8K0U9JkBXnks2v2v');
 
 
 const initialAddressState = {
@@ -35,8 +38,11 @@ export default function ShipmentAddress() {
   const elements = useElements();
   const inputRef = useRef(null);
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const handleShipping = (evt) => {
+  const handleShipping = async (evt) => {
+
+    const stripe = await stripePromise;
     const { name, value } = evt.target;
     setBillingAddress({
       ...billingAddress,
@@ -44,55 +50,40 @@ export default function ShipmentAddress() {
     })
   }
 
-  const handleFormSubmit = () => {
-    // const cardElement = elements.getElement('card');
-    // console.log("card element", cardElement);
-    // apiInstance.post('/payments/create', {
-    //   amount: total,
-    //   shipping: {
-    //     name: recipientFirstName + recipientLastName,
-    //     address: {
-    //       ...billingAddress
-    //     }
-    //   }
-    // }).then(({ data: clientSecret }) => {
+  const handleFormSubmit = async () => {
 
-    //   stripe.createPaymentMethod({
-    //     type: 'card',
-    //     card: cardElement,
-    //     billing_details: {
-    //       amount: total,
-    //       shipping: {
-    //         name: recipientFirstName + recipientLastName,
-    //         address: {
-    //           ...billingAddress
-    //         }
-    //       }
-    //     }
-    //   }).then(({ paymentMethod }) => {
-    //     console.log("Card Number Ref", inputRef)
-    //     stripe.confirmCardPayment(clientSecret, {
-    //       payment_method: cardElement
-    //     })
-    //       .then(({ paymentIntent }) => {
-    //         const configOrder = {
-    //           orderTotal: total,
-    //           orderItems: cartItems.map(item => {
-    //             const { id, image, title,
-    //               price, quantity } = item;
+    const checkoutData = cartItems.map((item) => {
+      return {
+        price_data: {
+          currency: 'INR',
+          product_data: {
+            name: item.title
+          },
+          unit_amount: item.price * 100
+        },
+        quantity: item.quantity
+      }
+    });
 
-    //             return {
-    //               id,
-    //               image,
-    //               title,
-    //               price,
-    //               quantity
-    //             };
-    //           })
-    //         }
-    //       });
-    //   })
+    // const response = await fetch('/create-checkout-session', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(checkoutData)
     // });
+
+    // const session = await response.json();
+    // const result = await stripe.redirectToCheckout({
+    //   sessionId: session.id,
+    // });
+
+    // if (result.error) {
+    //   console.log('Error', result.error.message)
+    // } else {
+    //   console.log('Result', result)
+    // }
+
     const configOrder = {
       orderTotal: total,
       orderItems: cartItems.map(item => {
@@ -104,17 +95,9 @@ export default function ShipmentAddress() {
     dispatch(
       saveOrderHistory(configOrder)
     );
+    history.push('/orderSuccess');
   }
 
-  const configCardElement = {
-    iconStyle: 'solid',
-    style: {
-      base: {
-        fontSize: '16px'
-      }
-    },
-    hidePostalCode: true
-  };
 
   return (
     <div className="checkout">
@@ -290,7 +273,7 @@ export default function ShipmentAddress() {
             </div>
             <div className="product-wrap">
               <div className="product-checkout-btn" onClick={handleFormSubmit}>
-                <button className="checkout-button">Place Order</button>
+                <button className="payment-checkout-button">Place Order</button>
               </div>
             </div>
           </div>
