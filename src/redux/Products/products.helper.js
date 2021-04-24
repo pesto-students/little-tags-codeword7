@@ -1,4 +1,4 @@
-import { firestore } from '../../config/Firebase/util';
+import { firestore } from '../../Config/Firebase/util';
 
 export const handleFetchProducts = ({ filterType }) => {
     return new Promise((resolve, reject) => {

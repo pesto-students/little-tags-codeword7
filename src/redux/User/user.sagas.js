@@ -1,5 +1,5 @@
 import { takeLatest, call, all, put } from 'redux-saga/effects';
-import { auth, handelUserProfile, getCurrentUser, GoogleProvider } from '../../config/Firebase/util';
+import { auth, handelUserProfile, getCurrentUser, GoogleProvider } from '../../Config/Firebase/util';
 import userTypes from './user.types';
 import { signInSuccess, signOutUserSuccess } from './user.actions';
 

@@ -1,4 +1,4 @@
-import { firestore } from '../../config/Firebase/util';
+import { firestore } from '../../Config/Firebase/util';
 
 export const handleSaveOrder = (order) => {
     console.log("In Save Order", order);

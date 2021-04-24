@@ -3,7 +3,7 @@ import './Login.scss';
 import { ImFacebook } from 'react-icons/im';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { GrFormClose } from 'react-icons/gr';
-import FirebaseContext from '../../config/Firebase/context';
+import FirebaseContext from '../../Config/Firebase/context';
 import { useDispatch } from 'react-redux';
 import { googleSignInStart } from '../../redux/User/user.actions';
 
