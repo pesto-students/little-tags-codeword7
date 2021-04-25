@@ -45,11 +45,11 @@ export const handelUserProfile = async ({ userAuth, additionalData }) => {
 }
 
 export const getCurrentUser = () => {
-    console.log("In get Current User");
     return new Promise((resolve, reject) => {
         const unsubscribe = auth.onAuthStateChanged(userAuth => {
             unsubscribe();
             resolve(userAuth);
-        })
+        }, reject);
+        
     })
 }

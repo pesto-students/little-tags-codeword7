@@ -3,8 +3,10 @@ import Product from "../Product/Product";
 import "./ProductCategory.scss";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { fetchProductsStart } from "../../redux/Products/products.action";
+import { fetchProductsStart, setProducts } from "../../redux/Products/products.action";
 import { useSelector } from "react-redux";
+const SHIMMER_CARDS_LENGTH = 3;
+const shimmerArray = new Array(SHIMMER_CARDS_LENGTH).fill(undefined);
 
 
 const mapState = ({ productsData }) => ({
@@ -14,20 +16,20 @@ const mapState = ({ productsData }) => ({
 export default function ProductCategory() {
   const dispatch = useDispatch();
   const { filterType } = useParams();
-  console.log("In Main Component", filterType);
   const { products } = useSelector(mapState);
 
   useEffect(() => {
     dispatch(fetchProductsStart({ filterType }))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
+    return () => {
+      console.log("Unmount Component");
+      setProducts([]);
+      console.log("After Unmount Component");
+    }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterType]);
 
   if (!Array.isArray(products)) return null;
-  if (products.length < 1) {
-    return (
-      <div>No Search Results</div>
-    )
-  }
 
   return (
     <div className="product-category-wrapper">
@@ -36,7 +38,7 @@ export default function ProductCategory() {
         {!filterType && "New Arrival"}
       </h3>
       <div className="product-cards">
-        {products.map((product, pos) => {
+        {products.length > 0 && products.map((product, pos) => {
           const configProduct = {
             ...product
           }
@@ -44,6 +46,20 @@ export default function ProductCategory() {
             key={pos}
             {...configProduct}
           />
+        })}
+        {products.length < 1 && shimmerArray.map((pos) => {
+          return (
+          <div class="card br">
+            <div class="wrapper">
+              <div className="shimmer-wrapper">
+                <div class="profilePic animate din"></div>
+                <div class="comment br animate w80"></div>
+                <div class="comment br animate"></div>
+              </div>
+              
+            </div>
+            <button className="product-btn">Add to Cart</button>
+          </div> )
         })}
       </div>
     </div>

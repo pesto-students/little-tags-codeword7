@@ -16,16 +16,16 @@ import OrderSuccessConfirmation from './components/OrderSuccessConfirmation/Orde
 import DashboardLayout from './layout/DashboardLayout/DashboardLayout';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
-const App = () => {
+const App = ({userCheck}) => {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(checkUserSession());
-  })
+  // useEffect(() => {
+  //   dispatch(checkUserSession());
+  // })
   return (
     // <Dashboard />
-    <div className="main-app">
+    <div className={userCheck ? 'main-app-check' : 'main-app'}>
       <BrowserRouter>
         <ScrollToTop />
         <Switch>

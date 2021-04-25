@@ -1,5 +1,6 @@
 import "./ShipmentAddress.scss";
 import FormInput from '../../UI/FormInput/FormInput';
+import priceFormatter from '../../Utility/priceFormatter';
 import React, { useState } from "react";
 import { createStructuredSelector } from "reselect";
 import { selectCartItems, selectCartTotal, selectCartItemsCount } from "../../redux/Cart/cart.selector";
@@ -8,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveOrderHistory } from '../../redux/Orders/orders.action';
 import { loadStripe } from '@stripe/stripe-js';
 const stripePromise = loadStripe('pk_test_RL2GR96Y8K0U9JkBXnks2v2v');
+
 
 
 const initialAddressState = {
@@ -215,7 +217,7 @@ export default function ShipmentAddress() {
                     />
                     <h6 className="product-label">{item.title}</h6>
                     <div>
-                      <h6 className="checkout-product-price">{item.price}</h6>
+                      <h6 className="checkout-product-price">{priceFormatter(item.price)}</h6>
                     </div>
                   </div>
                 </div>
@@ -225,7 +227,7 @@ export default function ShipmentAddress() {
               <div className="checkout-total-wrap">
                 <div className="checkout-total">
                   <div className="checkout-total-title">Subtotal</div>
-                  <div className="checkout-product-value">{total}</div>
+                  <div className="checkout-product-value">{priceFormatter(total)}</div>
                 </div>
                 <div className="checkout-total">
                   <div className="checkout-total-title">Shipping</div>
@@ -234,7 +236,7 @@ export default function ShipmentAddress() {
                 <div className="checkout-total">
                   <div className="checkout-total-title">Total</div>
                   <div className="checkout-product-value total-checkout-price">
-                    {total}
+                  {priceFormatter(total)}
                   </div>
                 </div>
               </div>

@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCartItems, selectCartTotal } from '../../redux/Cart/cart.selector';
 import { addProduct, reduceCartProduct, removeCartProduct } from '../../redux/Cart/cart.action';
 import { useHistory } from "react-router";
+import priceFormatter from '../../Utility/priceFormatter';
 
 const mapState = createStructuredSelector({
   cartItems: selectCartItems,
@@ -37,7 +38,7 @@ export default function Cart() {
   }
 
   return (
-    <div className="wrapper">
+    <div className="cart-wrapper">
       <h3 className="bag-heading">Your Bag ({cartItems.length} Items)</h3>
       {cartItems.length > 0 ? (
         <div className="main-bag">
@@ -70,7 +71,7 @@ export default function Cart() {
             <div className="checkout-wrapper">
               <div className="sub-total">
                 <div className="cart-item-title">Subtotal:</div>
-                <div className="cart-item-price">{total}</div>
+                <div className="cart-item-price">{priceFormatter(total)}</div>
               </div>
               <div className="shipping">
                 <div className="cart-item-title">Shipping:</div>
@@ -79,7 +80,7 @@ export default function Cart() {
               <div className="cart-line-1"></div>
               <div className="grand-total">
                 <div className="cart-item-title">Grand Total:</div>
-                <div className="cart-item-price">{total}</div>
+                <div className="cart-item-price">{priceFormatter(total)}</div>
               </div>
             </div>
             <div className="checkout-btn">

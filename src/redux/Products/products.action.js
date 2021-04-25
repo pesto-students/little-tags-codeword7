@@ -5,10 +5,12 @@ export const fetchProductsStart = (filters = {}) => ({
     payload: filters
 });
 
-export const setProducts = products => ({
+export const setProducts = (products=[]) => {
+    console.log("Action", products)
+    return ({
     type: productTypes.SET_PRODUCTS,
     payload: products
-});
+})};
 
 export const fetchProductStart = (productID) => ({
     type: productTypes.FETCH_PRODUCT_START,

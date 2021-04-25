@@ -1,13 +1,14 @@
 import { takeLatest, call, all, put } from 'redux-saga/effects';
 import { auth, handelUserProfile, getCurrentUser, GoogleProvider } from '../../Config/Firebase/util';
 import userTypes from './user.types';
-import { signInSuccess, signOutUserSuccess } from './user.actions';
+import { signInSuccess, signOutUserSuccess, userCheckedInSucess } from './user.actions';
 
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
   try {
     const userRef = yield call(handelUserProfile, { userAuth: user, additionalData });
     const snapshot = yield userRef.get();
+    console.log(snapshot.data());
     yield put(
       signInSuccess({
         id: snapshot.id,
@@ -22,10 +23,12 @@ export function* getSnapshotFromUserAuth(user, additionalData = {}) {
 export function* isUserAuthenticated() {
   try {
     const userAuth = yield getCurrentUser();
-    if (!userAuth) return;
+    if (!userAuth) {
+        yield put(userCheckedInSucess(true));
+    };
     yield getSnapshotFromUserAuth(userAuth);
   } catch (err) {
-    // console.log(err);
+    console.log(err.message);
   }
 }
 
@@ -34,6 +37,9 @@ export function* onCheckUserSession() {
 }
 
 export function* googleSignIn() {
+ 
+    yield put(userCheckedInSucess(true));
+  
   try {
     const { user } = yield auth.signInWithPopup(GoogleProvider);
     yield getSnapshotFromUserAuth(user);

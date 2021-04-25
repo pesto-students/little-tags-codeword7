@@ -21,3 +21,8 @@ export const signOutUserSuccess = () => ({
   type: userTypes.SIGN_OUT_USER_SUCCESS
 });
 
+export const userCheckedInSucess = (flagValue) => ({
+  type: userTypes.USER_CHECK_FLAG,
+  payload: flagValue
+})
+
