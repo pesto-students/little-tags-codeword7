@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrderHistory } from '../../redux/Orders/orders.action';
 import { loadStripe } from '@stripe/stripe-js';
+import withTranslator from "../../hoc/withTranslation";
 const stripePromise = loadStripe('pk_test_RL2GR96Y8K0U9JkBXnks2v2v');
 
 
@@ -26,7 +27,7 @@ const mapState = createStructuredSelector({
   cartItems: selectCartItems
 })
 
-export default function ShipmentAddress() {
+function ShipmentAddress(props) {
 
   const [recipientFirstName, setRecipientFirstName] = useState('');
   const [recipientLastName, setRecipientLastName] = useState('');
@@ -100,13 +101,13 @@ export default function ShipmentAddress() {
     <div className="checkout">
       <div className="address">
         <div className="title">
-          <h3 className="billing-title">Billing and Shipping</h3>
+          <h3 className="billing-title">{props.strings.BillingAndShipping}</h3>
         </div>
         <div className="shipping-form">
           <form>
             <div className="form-name-wrapper">
               <div className="form-group">
-                <label className="form-label">First Name</label>
+                <label className="form-label">{props.strings.FirstName}</label>
                 <FormInput
                   placeholder="First Name"
                   name="recipientFirstName"
@@ -116,7 +117,7 @@ export default function ShipmentAddress() {
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Last Name</label>
+                <label className="form-label">{props.strings.LastName}</label>
                 <FormInput
                   placeholder="Last Name"
                   name="recipientLastName"
@@ -127,7 +128,7 @@ export default function ShipmentAddress() {
               </div>
             </div>
             <div className="form-group">
-              <label className="form-label">Street Address</label>
+              <label className="form-label">{props.strings.StreetAddress}</label>
               <FormInput
                 placeholder="Street Address1"
                 name="line1"
@@ -144,7 +145,7 @@ export default function ShipmentAddress() {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Town / City</label>
+              <label className="form-label">{props.strings.City}</label>
               <FormInput
                 placeholder="City"
                 name="city"
@@ -154,7 +155,7 @@ export default function ShipmentAddress() {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">State</label>
+              <label className="form-label">{props.strings.State}</label>
               <FormInput
                 placeholder="State"
                 name="state"
@@ -164,7 +165,7 @@ export default function ShipmentAddress() {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Postal / ZIP</label>
+              <label className="form-label">{props.strings.Postal}</label>
               <FormInput
                 placeholder="State"
                 name="postal_code"
@@ -174,7 +175,7 @@ export default function ShipmentAddress() {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Phone</label>
+              <label className="form-label">{props.strings.Phone}</label>
               <FormInput
                 placeholder="Contact Number"
                 name="contactNo"
@@ -184,7 +185,7 @@ export default function ShipmentAddress() {
               />
             </div>
             <div className="form-group">
-              <label className="form-label">Email Addrss</label>
+              <label className="form-label">{props.strings.EmailAddress}s</label>
               <FormInput
                 placeholder="Email Address"
                 name="emailId"
@@ -198,12 +199,12 @@ export default function ShipmentAddress() {
       </div>
       <div className="payment">
         <div className="title">
-          <h3 className="billing-title">My Orders</h3>
+          <h3 className="billing-title">{props.strings.MyOrders}</h3>
         </div>
         <div className="products">
           <div className="product-title-group">
-            <div className="product-title-label product-label-1">Product</div>
-            <div className="product-title-label">Total</div>
+            <div className="product-title-label product-label-1">{props.strings.Product}</div>
+            <div className="product-title-label">{props.strings.GrandTotal}</div>
           </div>
           <div className="checkout-products">
             {cartItems.map(item => {
@@ -226,17 +227,17 @@ export default function ShipmentAddress() {
             <div className="product-wrap">
               <div className="checkout-total-wrap">
                 <div className="checkout-total">
-                  <div className="checkout-total-title">Subtotal</div>
+                  <div className="checkout-total-title">{props.strings.Subtotal}</div>
                   <div className="checkout-product-value">{priceFormatter(total)}</div>
                 </div>
                 <div className="checkout-total">
-                  <div className="checkout-total-title">Shipping</div>
-                  <div className="checkout-product-value">Free</div>
+                  <div className="checkout-total-title">{props.strings.Shipping}</div>
+                  <div className="checkout-product-value">{props.strings.Free}</div>
                 </div>
                 <div className="checkout-total">
-                  <div className="checkout-total-title">Total</div>
+                  <div className="checkout-total-title">{props.strings.GrandTotal}</div>
                   <div className="checkout-product-value total-checkout-price">
-                  {priceFormatter(total)}
+                    {priceFormatter(total)}
                   </div>
                 </div>
               </div>
@@ -244,7 +245,7 @@ export default function ShipmentAddress() {
 
             <div className="product-wrap">
               <div className="product-checkout-btn" onClick={handleFormSubmit}>
-                <button className="payment-checkout-button">Place Order</button>
+                <button className="payment-checkout-button">{props.strings.PlaceOrder}</button>
               </div>
             </div>
           </div>
@@ -253,3 +254,26 @@ export default function ShipmentAddress() {
     </div>
   );
 }
+
+ShipmentAddress.defaultProps = {
+  strings: {
+    BillingAndShipping: "Billing and Shipping",
+    FirstName: "First Name",
+    LastName: "Last Name",
+    StreetAddress: "Street Address",
+    City: "City",
+    State: "State",
+    Postal: "Postal",
+    Phone: "Phone Number",
+    EmailAddress: "EmailAddress",
+    MyOrders: "MyOrders",
+    Product: "Product",
+    Subtotal: "Subtotal",
+    Shipping: "Shipping",
+    Free: "Free",
+    GrandTotal: "Grand Total",
+    PlaceOrder: "Place Order"
+  }
+}
+
+export default withTranslator('ShipmentAddress')(ShipmentAddress);

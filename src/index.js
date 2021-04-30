@@ -7,12 +7,15 @@ import reportWebVitals from './reportWebVitals';
 // import Firebase from './Config/Firebase/Firebase';
 import { Provider } from 'react-redux';
 import store from './redux/createStore';
+import { LanguageProvider } from './Config/Language';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <LanguageProvider>
+      <Provider store={store}>
         <App />
-    </Provider>
+      </Provider>
+    </LanguageProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -3,8 +3,9 @@ import Product from "../Product/Product";
 import "./ProductCategory.scss";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { fetchProductsStart, setProducts } from "../../redux/Products/products.action";
+import { fetchProductsStart, setProducts, setProduct } from "../../redux/Products/products.action";
 import { useSelector } from "react-redux";
+import withTranslator from "../../hoc/withTranslation";
 const SHIMMER_CARDS_LENGTH = 3;
 const shimmerArray = new Array(SHIMMER_CARDS_LENGTH).fill(undefined);
 
@@ -13,20 +14,21 @@ const mapState = ({ productsData }) => ({
   products: productsData.products
 })
 
-export default function ProductCategory() {
+function ProductCategory(props) {
   const dispatch = useDispatch();
   const { filterType } = useParams();
   const { products } = useSelector(mapState);
 
   useEffect(() => {
     dispatch(fetchProductsStart({ filterType }))
-   
+
     return () => {
       console.log("Unmount Component");
       setProducts([]);
+      // setProduct({})
       console.log("After Unmount Component");
     }
-     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterType]);
 
   if (!Array.isArray(products)) return null;
@@ -44,24 +46,32 @@ export default function ProductCategory() {
           }
           return <Product
             key={pos}
-            {...configProduct}
+            product={configProduct}
           />
         })}
         {products.length < 1 && shimmerArray.map((pos) => {
           return (
-          <div class="card br">
-            <div class="wrapper">
-              <div className="shimmer-wrapper">
-                <div class="profilePic animate din"></div>
-                <div class="comment br animate w80"></div>
-                <div class="comment br animate"></div>
+            <div class="card br">
+              <div class="wrapper">
+                <div className="shimmer-wrapper">
+                  <div class="profilePic animate din"></div>
+                  <div class="comment br animate w80"></div>
+                  <div class="comment br animate"></div>
+                </div>
+
               </div>
-              
-            </div>
-            <button className="product-btn">Add to Cart</button>
-          </div> )
+              <button className="product-btn">{props.strings.AddToCart}</button>
+            </div>)
         })}
       </div>
     </div>
   );
 }
+
+ProductCategory.defaultProps = {
+  strings: {
+    AddToCart: "Add to Cart"
+  }
+}
+
+export default withTranslator('')(ProductCategory);

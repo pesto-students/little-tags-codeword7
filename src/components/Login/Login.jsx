@@ -6,19 +6,20 @@ import { GrFormClose } from 'react-icons/gr';
 import FirebaseContext from '../../Config/Firebase/context';
 import { useDispatch } from 'react-redux';
 import { googleSignInStart } from '../../redux/User/user.actions';
+import withTranslator from '../../hoc/withTranslation';
 
 // const mapState = ({ user }) => ({
 //     currentUser: user.currentUser
 // })
 
-const Login = ({ isLoginModal, setIsLoginModal }) => {
+const Login = (props) => {
     const firebase = useContext(FirebaseContext);
     const dispatch = useDispatch();
     // const { currentUser } = useSelector(mapState);
 
     const handleGoogleSignIn = () => {
         dispatch(googleSignInStart());
-        setIsLoginModal(false);
+        props.setIsLoginModal(false);
     }
 
     const doFacebookSignIn = () => {
@@ -31,22 +32,34 @@ const Login = ({ isLoginModal, setIsLoginModal }) => {
     }
 
     const doPhoneNoSignIn = () => {
-        setIsLoginModal(false);
+        props.setIsLoginModal(false);
         firebase.doPhoneNoSignIn();
     }
     return (
-        <div className={isLoginModal ? 'forms-wrapper' : 'forms-wrapper-hide'}>
-            <div className="close-btn" onClick={() => setIsLoginModal(false)}><GrFormClose className="close-btn-icon" /></div>
-            <div className="title"><h3 className="title-1">We're glad you're here. <br />Welcome to XYZ</h3></div>
-            <div><button className="facebook-btn" onClick={doFacebookSignIn}><ImFacebook className="facebook-icon" /><span className="connect-fb">Connect with Facebook</span></button></div>
-            <div><button className="google-btn" onClick={handleGoogleSignIn}><AiOutlineGoogle className="facebook-icon" /><span className="connect-fb">Connect with Google</span></button></div>
+        <div className={props.isLoginModal ? 'forms-wrapper' : 'forms-wrapper-hide'}>
+            <div className="close-btn" onClick={() => props.setIsLoginModal(false)}><GrFormClose className="close-btn-icon" /></div>
+            <div className="title"><h3 className="title-1">We're glad you're here. <br />{props.strings.WelcomeToXyz}</h3></div>
+            <div><button className="facebook-btn" onClick={doFacebookSignIn}><ImFacebook className="facebook-icon" /><span className="connect-fb">{props.strings.ConnectWithFacebook}</span></button></div>
+            <div><button className="google-btn" onClick={handleGoogleSignIn}><AiOutlineGoogle className="facebook-icon" /><span className="connect-fb">{props.strings.ConnectWithGoogle}</span></button></div>
             <div className="or-paragraph"><div className="or">Or</div></div>
             {/* <div className="email-text">Enter Your Mobile Number</div>
             <input type="text" className="input-number" placeholder="Enter your Mobile Number" /> */}
-            <div><button className="email-btn" onClick={doPhoneNoSignIn}>Continue with Mobile Number</button></div>
+            <div><button className="email-btn" onClick={doPhoneNoSignIn}>{props.strings.ContinueWithMobileNumber}</button></div>
 
         </div>
     );
 }
 
-export default Login;
+Login.defaultProps = {
+    strings: {
+        WereGladYoureHere: "We're glad you're here.",
+        WelcomeToXyz: "Welcome to XYZ",
+        ConnectWithFacebook: "Connect with Facebook",
+        ConnectWithGoogle: "Connect with Google",
+        Or: "Or",
+        ContinueWithMobileNumber: "Continue with Mobile Number",
+    }
+}
+
+
+export default withTranslator('LoginComponent')(Login);

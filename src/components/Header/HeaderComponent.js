@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react';
+import PropTypes from "prop-types";
 import './HeaderComponent.scss'
 import DrawerToggle from '../DrawerToggle/DrawerToggle';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -14,6 +15,10 @@ import { BiLogOut } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 // import { signOutUser } from '../../redux/User/user.sagas';
 import { signOutUserStart } from '../../redux/User/user.actions';
+// import { languageOptions } from '../../Lang';
+import withTranslator from '../../hoc/withTranslation';
+import Dropdown from '../../UI/Dropdown/Dropdown';
+
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -24,14 +29,25 @@ const SearchBar = (props) => {
   const { options, onInputChange } = props;
   return (
     <div className='SearchBar'>
-      <input type="text" placeholder="Search Products" className='SearchInput' onChange={onInputChange} />
-      <AiOutlineSearch className="search-icon" />
-      {
-        options.map((option, index) => {
-          return (
-            <input key={index} type="text" placeholder="Search Products" className='SearchInput' value={option.title} />
+      <div className="search-input">
+        <input type="text" placeholder="Search Products" className='SearchInput' onChange={onInputChange} />
+      </div>
+      {/* <AiOutlineSearch className="search-icon" /> */}
+      {options.length > 0 &&
+        <div className="search-result">
+          {options.map((option, index) =>
+          (
+            <div className="search-item-result">
+              <div >
+                <img className="search-img" src={option.src} alt="Nothing" />
+              </div>
+              <div className="search-result-title">
+                {option.title}
+              </div>
+            </div>
           )
-        })
+          )}
+        </div>
       }
     </div>
   )
@@ -42,9 +58,6 @@ const defaultOptions = [
     "title": "Nike Shoes",
     "src": [
       "https://picsum.photos/id/0/300/200",
-      "https://picsum.photos/id/1/300/200",
-      "https://picsum.photos/id/10/300/200",
-      "https://picsum.photos/id/100/300/200",
     ],
     "description": "Description of product",
     "price": 23,
@@ -56,9 +69,6 @@ const defaultOptions = [
     "title": "Headset",
     "src": [
       "https://picsum.photos/id/0/300/200",
-      "https://picsum.photos/id/1/300/200",
-      "https://picsum.photos/id/10/300/200",
-      "https://picsum.photos/id/100/300/200",
     ],
     "description": "Description of product",
     "price": 23,
@@ -67,10 +77,9 @@ const defaultOptions = [
   }
 ];
 
-function HeaderComponent() {
+function HeaderComponent(props) {
   const [isSidebar, setIsSidebar] = useState(false);
   const [isLoginModal, setIsLoginModal] = useState(false);
-  // const firebase = useContext(FirebaseContext);
   const [options, setOptions] = useState([])
   const { currentUser, totalNumberOfCartItem } = useSelector(mapState);
   const dispatch = useDispatch();
@@ -80,8 +89,20 @@ function HeaderComponent() {
   }
 
   const onInputChange = (event) => {
-    setOptions(defaultOptions.filter((option) => option.title.includes(event.target.value)))
-    //console.log(event.target.value)
+    const value = event.target.value;
+    console.log(value);
+    if (value === "") {
+      setOptions([]);
+    } else {
+      const searchArray = defaultOptions.map(item => {
+        return {
+          ...item,
+          title: item.title.toLocaleLowerCase()
+        }
+      }
+      );
+      setOptions(searchArray.filter((option) => option.title.includes(value.toLocaleLowerCase())))
+    }
   }
 
   return (
@@ -94,15 +115,17 @@ function HeaderComponent() {
 
         <div className='logo'>
           <Link className="link" to="/">
-            Little Tags
-                </Link>
+            {props.strings.LittleTag}
+          </Link>
         </div>
 
         <SearchBar options={options} onInputChange={onInputChange} />
 
+        <Dropdown />
+
         {!currentUser &&
           [<div className='login' onClick={() => setIsLoginModal(!isLoginModal)}>
-            <BiLogIn className="login-user-icon" /><span className="login-header-title">Login</span>
+            <BiLogIn className="login-user-icon" /><span className="login-header-title">{props.strings.Login}</span>
           </div>
           ]}
 
@@ -113,11 +136,11 @@ function HeaderComponent() {
             </div>
             <div className='login-item'>
               <FaShoppingCart className="login-icon header-cart-icon" /><span ><Link className="header-cart-icon" to="/cart">
-                Your Cart ({totalNumberOfCartItem})
+                {props.strings.YourBag} ({totalNumberOfCartItem})
                 </Link></span>
             </div>
             <div className='login-item' onClick={() => signOut()}>
-              <BiLogOut className="login-icon" /><span className="login-title">Logout</span>
+              <BiLogOut className="login-icon" /><span className="login-title">{props.strings.Logout}</span>
             </div>
           </div>
           ]}
@@ -130,4 +153,20 @@ function HeaderComponent() {
   )
 }
 
-export default HeaderComponent;
+HeaderComponent.defaultProps = {
+  strings: {
+    LittleTag: "Little Tag",
+    Login: "Login",
+    YourBag: "Your Bag",
+    Logout: "Logout"
+  }
+}
+
+
+HeaderComponent.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string,
+  price: PropTypes.number
+};
+
+export default withTranslator('HeaderComponent')(HeaderComponent);

@@ -1,8 +1,9 @@
 import React from "react";
 import "./DashboardCategory.scss";
 import { Link } from 'react-router-dom';
+import withTranslator from "../../hoc/withTranslation";
 
-export default function DashboardCategory() {
+function DashboardCategory(props) {
   return (
     <section className="gallery">
       <div className="gallery-img-1">
@@ -12,8 +13,8 @@ export default function DashboardCategory() {
           className="gallery-img "
         />
         <h1 className="image-heading"><Link className="link" to="/products/men clothing">
-          Men Clothing
-          </Link></h1>
+          {props.strings.MenClothing}
+        </Link></h1>
       </div>
       <div className="gallery-img-2">
         <img
@@ -22,8 +23,8 @@ export default function DashboardCategory() {
           className="gallery-img"
         />
         <h2 className="image-heading"><Link className="link" to="/products/jewelery">
-          Jewelery
-          </Link></h2>
+          {props.strings.Jewelery}
+        </Link></h2>
       </div>
       <div className="gallery-img-3">
         <img
@@ -32,8 +33,8 @@ export default function DashboardCategory() {
           className="gallery-img"
         />
         <h2 className="image-heading electronic"><Link className="link" to="/products/electronics">
-          Electronics
-          </Link></h2>
+          {props.strings.Electronics}
+        </Link></h2>
       </div>
       <div className="gallery-img-4">
         <img
@@ -42,9 +43,20 @@ export default function DashboardCategory() {
           className="gallery-img"
         />
         <h2 className="image-heading electronic"><Link className="link" to="/products/women clothing">
-          Women's Clothing
-          </Link></h2>
+          {props.strings.WomenClothing}
+        </Link></h2>
       </div>
     </section>
   );
 }
+
+DashboardCategory.defaultProps = {
+  strings: {
+    MenClothing: "Men Clothing",
+    WomenClothing: "Women Clothing",
+    Jewelery: "Jewelery",
+    Electronics: "Electronics",
+  }
+}
+
+export default withTranslator('DashboardCategory')(DashboardCategory);

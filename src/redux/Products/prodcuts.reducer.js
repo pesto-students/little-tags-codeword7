@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 }
 
 const productReducer = (state = INITIAL_STATE, action) => {
-    console.log("Action", action);
+    console.log("Action from saga", action);
     switch (action.type) {
         case productTypes.SET_PRODUCTS:
             return {

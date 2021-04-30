@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router';
 import './ProductDesc.scss';
 // eslint-disable-next-line
-import { setProduct, fetchProductStart } from '../../redux/Products/products.action';
+import { setProduct, fetchProductStart, setProducts } from '../../redux/Products/products.action';
+import withTranslator from '../../hoc/withTranslation';
 
 const mapState = state => ({
   product: state.productsData.product
 })
 
-function ProductDesc() {
+function ProductDesc(props) {
 
   const dispatch = useDispatch();
   const { productID } = useParams();
@@ -24,6 +25,7 @@ function ProductDesc() {
     );
 
     return () => {
+      setProducts([]);
       setProduct({})
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,7 +84,7 @@ function ProductDesc() {
               ))
             }
           </div>
-          <button className="cart">Add to cart</button>
+          <button className="cart">{props.strings.AddToCart}</button>
 
         </div>
       </div>
@@ -90,4 +92,10 @@ function ProductDesc() {
   )
 }
 
-export default ProductDesc;
+ProductDesc.defaultProps = {
+  strings: {
+    AddToCart: "Add to Cart"
+  }
+}
+
+export default withTranslator('ProductDescComponent')(ProductDesc);
