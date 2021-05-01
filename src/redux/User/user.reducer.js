@@ -1,8 +1,11 @@
+import { act } from 'react-dom/test-utils';
 import userTypes from './user.types';
 
 const INITIAL_STATE = {
   currentUser: null,
-  userCheck: false
+  userCheck: false,
+  addAddressModalFlag: false,
+  userAddressFlag: false
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -17,6 +20,16 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         ...INITIAL_STATE
+      }
+    case userTypes.ADD_ADDRESS_MODAL_FLAG:
+      return {
+        ...state,
+        addAddressModalFlag: action.payload
+      }
+    case userTypes.ADD_USER_ADDRESS_FLAG:
+      return {
+        ...state,
+        userAddressFlag: action.payload
       }
     case userTypes.USER_CHECK_FLAG:
       return {

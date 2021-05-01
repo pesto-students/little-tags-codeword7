@@ -8,14 +8,15 @@ import { checkUserSession, userCheckedInSucess } from '../redux/User/user.action
 import Loader from '../UI/Loader/Loader';
 
 const mapState = (state) => ({
-    userCheck: state.user.userCheck
+    userCheck: state.user.userCheck,
+    userAddressFlag: state.user.userAddressFlag
 });
 
 const withAuthenticaton = (Component) => {
 
     const NewComponent = (props) => {
         const dispatch = useDispatch();
-        const { userCheck } = useSelector(mapState);
+        const { userCheck, userAddressFlag } = useSelector(mapState);
         useEffect(() => {
             dispatch(userCheckedInSucess(true));
             dispatch(checkUserSession());
@@ -40,10 +41,10 @@ const withAuthenticaton = (Component) => {
 
         return (
             <div>
-                {userCheck &&
+                {(userCheck || userAddressFlag) &&
                     <Loader />
                 }
-                <Component userCheck={userCheck} {...props} />
+                <Component userCheck={userCheck} userAddressFlag={userAddressFlag} {...props} />
             </div>
 
         );

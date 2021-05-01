@@ -43,3 +43,14 @@
     font-size: 1.4rem;
 }
 
+@media(max-width:768px) {
+    .order-success-card {
+      width: 70rem;
+    }
+}
+@media(max-width:425px) {
+    .order-success-card {
+      width: 30rem;
+    }
+}
+

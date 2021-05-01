@@ -53,3 +53,29 @@
   color: white;
   text-decoration: none;
 }
+@media(max-width:425px) {
+  .gallery {
+    grid-template-rows: repeat(4, 60vw);
+    grid-gap: 3.6rem;
+  }
+  .gallery-img-1 {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    position: relative;
+  }
+  .gallery-img-2 {
+    grid-row: 2 / 3;
+    grid-column: 1 / -1;
+    position: relative;
+  }
+  .gallery-img-3 {
+    grid-row: 3 / 4;
+    grid-column: 1 / -1;
+    position: relative;
+  }
+  .gallery-img-4 {
+    grid-row: 4 / -1;
+    grid-column: 1 / -1;
+    position: relative;
+  }
+}

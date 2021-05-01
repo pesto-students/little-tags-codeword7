@@ -14,7 +14,7 @@ const HomeBanner = (props) => (
     </div> */}
     <div className="banner-wrapper">
       <div className="left-banner-text">
-        <div><p className="for-text">For</p><p className="online-text"> {props.strings.Online} </p><p className="for-text">{props.strings.Order}</p></div>
+        <div><p className="for-text">{props.strings.For}</p><p className="online-text"> {props.strings.Online} </p><p className="for-text">{props.strings.Order}</p></div>
         <div className="discount-horizontal">
           <div className="discount-text"><p className="">30% </p><p>{props.strings.Off}</p></div>
         </div>

@@ -7,44 +7,38 @@ import { selectCartItems, selectCartTotal, selectCartItemsCount } from "../../re
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrderHistory } from '../../redux/Orders/orders.action';
+import { addAddressModal } from '../../redux/User/user.actions'
 import { loadStripe } from '@stripe/stripe-js';
 import withTranslator from "../../hoc/withTranslation";
+import { BsPlusCircle } from 'react-icons/bs';
+import AddressDetailCard from '../AddressDetailCard/AddressDetailCard'
 const stripePromise = loadStripe('pk_test_RL2GR96Y8K0U9JkBXnks2v2v');
 
 
 
-const initialAddressState = {
-  line1: '',
-  line2: '',
-  city: '',
-  state: '',
-  postal_code: '',
-}
+
 
 const mapState = createStructuredSelector({
   total: selectCartTotal,
   itemCount: selectCartItemsCount,
   cartItems: selectCartItems
+});
+
+const userMapState = ({ user }) => ({
+  userAddress: user.currentUser.userAddress
 })
 
 function ShipmentAddress(props) {
 
-  const [recipientFirstName, setRecipientFirstName] = useState('');
-  const [recipientLastName, setRecipientLastName] = useState('');
-  const [billingAddress, setBillingAddress] = useState({ ...initialAddressState });
-  const [contactNo, setContactNo] = useState('');
-  const [emailId, setEmailId] = useState('');
+
   const { cartItems, total } = useSelector(mapState);
+  const { userAddress } = useSelector(userMapState);
   const dispatch = useDispatch();
   const history = useHistory();
+  let selectedUserAddress = {};
 
-  const handleShipping = async (evt) => {
-
-    const { name, value } = evt.target;
-    setBillingAddress({
-      ...billingAddress,
-      [name]: value
-    })
+  const onAddressChanged = (event) => {
+    selectedUserAddress = userAddress[event.target.value];
   }
 
   const handleFormSubmit = async () => {
@@ -64,7 +58,8 @@ function ShipmentAddress(props) {
     });
     const configOrder = {
       orderTotal: total,
-      userName: recipientFirstName + recipientLastName,
+      userData: selectedUserAddress,
+      // userName: recipientFirstName + recipientLastName,
       orderItems: cartItems.map(item => {
         const { id, image, title, price, quantity } = item;
         return { id, image, title, price, quantity }
@@ -97,104 +92,22 @@ function ShipmentAddress(props) {
   }
 
 
+
+
   return (
     <div className="checkout">
       <div className="address">
         <div className="title">
           <h3 className="billing-title">{props.strings.BillingAndShipping}</h3>
         </div>
-        <div className="shipping-form">
-          <form>
-            <div className="form-name-wrapper">
-              <div className="form-group">
-                <label className="form-label">{props.strings.FirstName}</label>
-                <FormInput
-                  placeholder="First Name"
-                  name="recipientFirstName"
-                  handleOnChange={evt => setRecipientFirstName(evt.target.value)}
-                  value={recipientFirstName}
-                  type="text"
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label">{props.strings.LastName}</label>
-                <FormInput
-                  placeholder="Last Name"
-                  name="recipientLastName"
-                  handleOnChange={evt => setRecipientLastName(evt.target.value)}
-                  value={recipientFirstName}
-                  type="text"
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <label className="form-label">{props.strings.StreetAddress}</label>
-              <FormInput
-                placeholder="Street Address1"
-                name="line1"
-                handleOnChange={evt => handleShipping(evt)}
-                value={billingAddress.line1}
-                type="text"
-              />
-              <FormInput
-                placeholder="Street Address2"
-                name="line2"
-                handleOnChange={evt => handleShipping(evt)}
-                value={billingAddress.line2}
-                type="text"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">{props.strings.City}</label>
-              <FormInput
-                placeholder="City"
-                name="city"
-                handleOnChange={evt => handleShipping(evt)}
-                value={billingAddress.city}
-                type="text"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">{props.strings.State}</label>
-              <FormInput
-                placeholder="State"
-                name="state"
-                handleOnChange={evt => handleShipping(evt)}
-                value={billingAddress.state}
-                type="text"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">{props.strings.Postal}</label>
-              <FormInput
-                placeholder="State"
-                name="postal_code"
-                handleOnChange={evt => handleShipping(evt)}
-                value={billingAddress.postal_code}
-                type="text"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">{props.strings.Phone}</label>
-              <FormInput
-                placeholder="Contact Number"
-                name="contactNo"
-                handleOnChange={evt => setContactNo(evt)}
-                value={contactNo}
-                type="text"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">{props.strings.EmailAddress}s</label>
-              <FormInput
-                placeholder="Email Address"
-                name="emailId"
-                handleOnChange={evt => setEmailId(evt.target.value)}
-                value={emailId}
-                type="text"
-              />
-            </div>
-          </form>
+        <div className="shipping-address-data">
+          {userAddress.length > 0 && userAddress.map((address, index) =>
+            <AddressDetailCard Address={address} index={index} onAddressChanged={onAddressChanged} />
+          )}
+
+          <div className="shipping-address">
+            <BsPlusCircle className="add-circle" onClick={() => dispatch(addAddressModal(true))} /><span className="add-new-address-text">Add new Address</span>
+          </div>
         </div>
       </div>
       <div className="payment">
@@ -258,14 +171,7 @@ function ShipmentAddress(props) {
 ShipmentAddress.defaultProps = {
   strings: {
     BillingAndShipping: "Billing and Shipping",
-    FirstName: "First Name",
-    LastName: "Last Name",
-    StreetAddress: "Street Address",
-    City: "City",
-    State: "State",
-    Postal: "Postal",
-    Phone: "Phone Number",
-    EmailAddress: "EmailAddress",
+
     MyOrders: "MyOrders",
     Product: "Product",
     Subtotal: "Subtotal",

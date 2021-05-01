@@ -46,11 +46,11 @@ export default {
     HomaBannerComponent: {
         Online: "ऑनलाइन",
         Order: "ऑर्डर",
-        Off: "OFF",
+        Off: "की छूट",
         NewArrivals: "नया आगमन",
         Just: "सिर्फ",
-        For: "तुम्हारे",
-        You: "You",
+        For: "आपके",
+        You: "लिए",
         ShopNow: "अभी खरीदो"
     },
     LoginComponent: {
@@ -80,8 +80,7 @@ export default {
         GrandTotal: "कुल",
         Checkout: "चेक आउट"
     },
-    ShipmentAddress: {
-        BillingAndShipping: "बिलिंग तथा शिपिंग",
+    AddressComponent: {
         FirstName: "प्रथम नाम",
         LastName: "पिछले नाम",
         StreetAddress: "सड़क पता",
@@ -90,6 +89,10 @@ export default {
         Postal: "डाक का पता",
         Phone: "फ़ोन",
         EmailAddress: "ईमेल",
+    },
+    ShipmentAddress: {
+        BillingAndShipping: "बिलिंग तथा शिपिंग",
+
         MyOrders: "मेरे ऑर्डर",
         Product: "Product",
         Subtotal: "उपकुल",

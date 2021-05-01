@@ -1,0 +1,25 @@
+.shipping-address {
+    display: flex;
+      padding: 1rem;
+      border: 1px solid lightgray;
+      
+      
+  }
+  
+  .shipping-address-data {
+    margin-top: 4rem;
+  }
+  .address-data {
+      font-size: 1.2rem;
+      letter-spacing: 0.1rem;
+      margin-left: 3rem;
+      flex-grow: 1;
+      p {
+        margin-block-end: 0.5em;
+      }
+  }
+  .address-username {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-block-start: 0em;
+  }

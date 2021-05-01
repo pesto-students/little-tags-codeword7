@@ -57,3 +57,30 @@
         color: white;
     }
 }
+
+@media(max-width:768px) {
+    .dropdown-wrapper {
+        width: 7rem;
+    }
+    .dropdown {
+        font-size: 10px;
+    }
+    .air-dropdown {
+        font-size: 1.5rem;
+    }
+    .selected-item {
+        font-size: 1.2rem;
+    }
+  }
+
+  @media(max-width:320px) {
+    .dropdown-wrapper {
+        width: 6rem;
+    }
+    .air-dropdown {
+        font-size: 1.2rem;
+    }
+    .selected-item {
+        font-size: 1rem;
+    }
+  }

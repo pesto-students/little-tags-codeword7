@@ -24,5 +24,20 @@ export const signOutUserSuccess = () => ({
 export const userCheckedInSucess = (flagValue) => ({
   type: userTypes.USER_CHECK_FLAG,
   payload: flagValue
+});
+
+export const addAddressModal = (addressModalFlag) => ({
+  type: userTypes.ADD_ADDRESS_MODAL_FLAG,
+  payload: addressModalFlag
+});
+
+export const addUserAddress = (addressData) => ({
+  type: userTypes.ADD_USER_ADDRESS_START,
+  payload: addressData
+})
+
+export const addUserAddressFlag = (userAddressFlagValue) => ({
+  type: userTypes.ADD_USER_ADDRESS_FLAG,
+  payload: userAddressFlagValue
 })
 

@@ -68,7 +68,7 @@ function Cart(props) {
             })}
             <div className="cart-line-2"></div>
           </div>
-          <div>
+          <div className="checkout-item">
             <div className="checkout-wrapper">
               <div className="sub-total">
                 <div className="cart-item-title">{props.strings.Subtotal}:</div>

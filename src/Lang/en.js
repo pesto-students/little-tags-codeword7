@@ -17,6 +17,16 @@ export default {
         AddAddress: "Add Address",
         Logout: "Logout"
     },
+    AddressComponent: {
+        FirstName: "First Name",
+        LastName: "Last Name",
+        StreetAddress: "Street Address",
+        City: "City",
+        State: "State",
+        Postal: "Postal",
+        Phone: "Phone Number",
+        EmailAddress: "EmailAddress",
+    },
     DashboardComponent: {
         NewArrival: "New Arrival",
     },
@@ -82,14 +92,6 @@ export default {
     },
     ShipmentAddress: {
         BillingAndShipping: "Billing and Shipping",
-        FirstName: "First Name",
-        LastName: "Last Name",
-        StreetAddress: "Street Address",
-        City: "City",
-        State: "State",
-        Postal: "Postal",
-        Phone: "Phone Number",
-        EmailAddress: "EmailAddress",
         MyOrders: "MyOrders",
         Product: "Product",
         Subtotal: "Subtotal",

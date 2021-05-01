@@ -76,6 +76,7 @@
   background-color: #030303;
   padding: 0 4rem;
   font-family: 'Nunito';
+  flex-wrap: wrap;
 }
 .copyright-text {
   font-size: 1.5rem;
@@ -84,4 +85,33 @@
 .text-right {
   font-size: 2rem;
   color: #bbb;
+}
+
+@media(max-width:768px) {
+  
+    .footer-heading {
+      font-size: 1.5rem;
+    }
+    .footer-list-link {
+      font-size: 1.2rem;
+    }
+    .footer-paragraph {
+      font-size: 1.2rem;
+    }
+    .copyright-text {
+      font-size: 1.2rem;
+    }
+    .text-right {
+      font-size: 1.5rem;
+    }
+  
+}
+
+@media(max-width:425px) {
+    .main-part {
+      row-gap: 2rem;
+    }
+    .contact-info {
+      flex-basis: auto;
+    }
 }

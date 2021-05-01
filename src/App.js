@@ -16,7 +16,7 @@ import OrderSuccessConfirmation from './components/OrderSuccessConfirmation/Orde
 import DashboardLayout from './layout/DashboardLayout/DashboardLayout';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
-const App = ({userCheck}) => {
+const App = ({ userCheck, userAddressFlag }) => {
 
   // const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ const App = ({userCheck}) => {
   // })
   return (
     // <Dashboard />
-    <div className={userCheck ? 'main-app-check' : 'main-app'}>
+    <div className={(userCheck || userAddressFlag) ? 'main-app-check' : 'main-app'}>
       <BrowserRouter>
         <ScrollToTop />
         <Switch>

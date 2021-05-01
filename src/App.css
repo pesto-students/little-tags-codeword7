@@ -12,3 +12,10 @@ html {
     box-sizing: border-box;   
     height: 100%;
 }
+
+
+@media(max-width:425px) {
+    html {
+        width: 104%;
+    }
+  }

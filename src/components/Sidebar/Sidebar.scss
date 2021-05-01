@@ -188,3 +188,9 @@
 .order-navigation-link:hover::after {
   width: 3rem;
 }
+
+@media(max-width: 425px) {
+  .openSidebar {
+    height: 111vh;
+  }
+}
