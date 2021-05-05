@@ -104,11 +104,13 @@ function ProductDesc(props) {
               ))
             }
           </div>
-          <div className="quantity">
-            <div className="item-qty">
-              <BiMinus />
-              <div>1</div>
-              <BiPlus />
+          <div className="qty-wrapper">
+            <div className="quantity">
+              <div className="item-qty">
+                <BiMinus />
+                <div>1</div>
+                <BiPlus />
+              </div>
             </div>
           </div>
           <button className="cart">{props.strings.AddToCart}</button>
