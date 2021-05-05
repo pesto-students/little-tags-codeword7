@@ -1,7 +1,7 @@
 // import React, { useEffect, useContext } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 // import FirebaseContext from '../Config/Firebase/context';
-import { setAuthUser } from '../actions';
+// import { setAuthUser } from '../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { checkUserSession, userCheckedInSucess } from '../redux/User/user.actions';
@@ -20,6 +20,7 @@ const withAuthenticaton = (Component) => {
         useEffect(() => {
             dispatch(userCheckedInSucess(true));
             dispatch(checkUserSession());
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
         // const firebase = useContext(FirebaseContext);
         // const saveToLocalStorage = (authUser) => {

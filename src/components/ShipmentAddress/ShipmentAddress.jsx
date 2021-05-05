@@ -1,7 +1,7 @@
 import "./ShipmentAddress.scss";
-import FormInput from '../../UI/FormInput/FormInput';
+// import FormInput from '../../UI/FormInput/FormInput';
 import priceFormatter from '../../Utility/priceFormatter';
-import React, { useState } from "react";
+import React from "react";
 import { createStructuredSelector } from "reselect";
 import { selectCartItems, selectCartTotal, selectCartItemsCount } from "../../redux/Cart/cart.selector";
 import { useHistory } from 'react-router-dom';

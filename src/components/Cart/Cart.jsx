@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCartItems, selectCartTotal } from '../../redux/Cart/cart.selector';
 import { addProduct, reduceCartProduct, removeCartProduct } from '../../redux/Cart/cart.action';
 import { useHistory } from "react-router";
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import priceFormatter from '../../Utility/priceFormatter';
 import withTranslator from "../../hoc/withTranslation";
 

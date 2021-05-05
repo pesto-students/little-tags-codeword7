@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import PropTypes from "prop-types";
 import './HeaderComponent.scss'
 import DrawerToggle from '../DrawerToggle/DrawerToggle';
 import { FaShoppingCart } from 'react-icons/fa';
-import { AiOutlineSearch } from 'react-icons/ai';
+// import { AiOutlineSearch } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
 import Sidebar from '../Sidebar/Sidebar';
 import Login from '../Login/Login';

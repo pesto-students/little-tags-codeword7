@@ -3,7 +3,7 @@ import Product from "../Product/Product";
 import "./ProductCategory.scss";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { fetchProductsStart, setProducts, setProduct } from "../../redux/Products/products.action";
+import { fetchProductsStart, setProducts } from "../../redux/Products/products.action";
 import { useSelector } from "react-redux";
 import withTranslator from "../../hoc/withTranslation";
 import { ToastContainer, toast } from 'react-toastify';

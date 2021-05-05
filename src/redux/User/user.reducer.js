@@ -1,4 +1,4 @@
-import { act } from 'react-dom/test-utils';
+//import { act } from 'react-dom/test-utils';
 import userTypes from './user.types';
 
 const INITIAL_STATE = {
