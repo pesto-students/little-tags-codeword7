@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router';
+import { BiPlus, BiMinus } from "react-icons/bi";
 import './ProductDesc.scss';
 // eslint-disable-next-line
 import { setProduct, fetchProductStart, setProducts } from '../../redux/Products/products.action';
 import withTranslator from '../../hoc/withTranslation';
+import priceFormatte from '../../Utility/priceFormatter';
+import { addProduct, reduceCartProduct } from '../../redux/Cart/cart.action';
 
 const mapState = state => ({
   product: state.productsData.product
@@ -31,7 +34,7 @@ function ProductDesc(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
 
   const myRef = useRef()
 
@@ -39,8 +42,23 @@ function ProductDesc(props) {
   //   myRef.current.children[index].className = "active";
   // }, [index])
 
+  const addCartItem = (product) => {
+    dispatch(
+      addProduct(product)
+    );
+  }
+
+  const reduceCartItem = (product) => {
+    dispatch(
+      reduceCartProduct(product)
+    );
+  }
+
+  const handleSize = index => {
+    console.log(index)
+  }
   const handleTab = index => {
-    // setIndex(index)
+    setIndex(index)
     const images = myRef.current.children;
     for (let i = 0; i < images.length; i++) {
       images[i].className = images[i].className.replace("active", "");
@@ -55,18 +73,20 @@ function ProductDesc(props) {
     <div className="app">
       <div className="details">
         <div className="big-img">
-          <img src={image} alt="" />
+          <img src={image[index]} alt="" />
         </div>
 
         <div className="box">
           <div className="row">
             <h2>{title}</h2>
-            <span>₹{price}</span>
           </div>
-          <div className="colors">
+          <div className="row">
+            <span>{priceFormatte(price)}</span>
+          </div>
+          <div className="size-btn">
             {
               size.map((itemSize, index) => (
-                <button key={index}>{itemSize}</button>
+                <button key={index} onClick={() => handleSize(index)}>{itemSize}</button>
               ))
             }
           </div>
@@ -84,8 +104,14 @@ function ProductDesc(props) {
               ))
             }
           </div>
+          <div className="quantity">
+            <div className="item-qty">
+              <BiMinus />
+              <div>1</div>
+              <BiPlus />
+            </div>
+          </div>
           <button className="cart">{props.strings.AddToCart}</button>
-
         </div>
       </div>
     </div>

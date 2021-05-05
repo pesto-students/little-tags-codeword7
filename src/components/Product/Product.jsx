@@ -21,7 +21,7 @@ function Product(props) {
   return (
     <div>
       <div className="product-card">
-        <img src={image} alt="" className="product-img" />
+        <img src={image[0]} alt="" className="product-img" />
         <h2 className="product-heading" onClick={() => history.push(`/product/${id}`)}>{title}</h2>
         <div className="product-price">{props.strings.Price}: {priceFormatter(price)}</div>
         <button className="product-btn" onClick={() => handleAddToCart(props.product)}>{props.strings.AddtoCart}</button>
