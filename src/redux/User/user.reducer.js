@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   currentUser: null,
   userCheck: false,
   addAddressModalFlag: false,
-  userAddressFlag: false
+  userAddressFlag: false,
+  loginModalFlag: false
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -34,7 +35,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case userTypes.USER_CHECK_FLAG:
       return {
         ...state,
-        userCheck: true
+        userCheck: action.payload
+      }
+    case userTypes.IS_LOGIN_MODAL_OPEN:
+      return {
+        ...state,
+        loginModalFlag: action.payload
       }
     default:
       return state;

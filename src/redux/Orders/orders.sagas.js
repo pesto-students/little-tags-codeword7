@@ -4,6 +4,7 @@ import { auth } from '../../Config/Firebase/util';
 import { handleSaveOrder, handleGetOrderHistory, handleGetOrder } from './orders.helper';
 import { clearCart } from '../Cart/cart.action';
 import { setOrderDetail, setOrderHistory } from './orders.action';
+import { userCheckedInSucess } from '../User/user.actions';
 
 export function* saveOrder({ payload }) {
     console.log("In order Saga", { ...payload });
@@ -23,6 +24,7 @@ export function* saveOrder({ payload }) {
 }
 
 export function* onSaveOrderHistoryStart() {
+
     yield takeLatest(orderTypes.SAVE_ORDER_HISTORY_START, saveOrder);
 }
 

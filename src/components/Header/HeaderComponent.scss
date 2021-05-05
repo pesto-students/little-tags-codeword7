@@ -59,16 +59,7 @@
 }
 .login {
   color: white;
-  flex-direction: row;
-  flex-grow: 1;
-  letter-spacing: 0.1rem;
-  font-size: 1.8rem;
-  margin-right: 10rem;
-  text-align: right;
-    font-family: 'Nunito';
-    letter-spacing: 0.2rem;
-    font-weight: 700;
-  
+    margin-left: 30rem;
 }
 .login-item {
     display: flex;
@@ -80,7 +71,7 @@
 }
 .login-user-icon {
   margin-right: 1rem;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 .header-cart-icon {
   color: white;
@@ -88,6 +79,8 @@
 }
 .login-header-title {
   font-size: 2.5rem;
+    letter-spacing: 0.1rem;
+    font-family: 'Nunito';
 }
 .SearchInput {
   height: 32px;

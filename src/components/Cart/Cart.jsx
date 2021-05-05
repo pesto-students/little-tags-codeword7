@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCartItems, selectCartTotal } from '../../redux/Cart/cart.selector';
 import { addProduct, reduceCartProduct, removeCartProduct } from '../../redux/Cart/cart.action';
 import { useHistory } from "react-router";
+import { ToastContainer, toast } from 'react-toastify';
 import priceFormatter from '../../Utility/priceFormatter';
 import withTranslator from "../../hoc/withTranslation";
 
@@ -19,6 +20,8 @@ function Cart(props) {
   const { cartItems, total } = useSelector(mapState);
   const errMsg = 'You have no items in your cart.';
   const history = useHistory();
+
+
 
   const addCartItem = (product) => {
     dispatch(
@@ -40,6 +43,7 @@ function Cart(props) {
 
   return (
     <div className="cart-wrapper">
+
       <h3 className="bag-heading">{props.strings.YourBag} ({cartItems.length} Items)</h3>
       {cartItems.length > 0 ? (
         <div className="main-bag">

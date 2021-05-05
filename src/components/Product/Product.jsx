@@ -2,22 +2,31 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Product.scss";
 import { addProduct } from '../../redux/Cart/cart.action';
-import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router";
 import priceFormatter from '../../Utility/priceFormatter';
 import withTranslator from '../../hoc/withTranslation';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeLoginModal } from '../../redux/User/user.actions'
+
+const mapState = (state) => ({
+  currentUser: state.user.currentUser
+});
 
 function Product(props) {
   const { image, title, price, id } = props.product;
+  const { currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleAddToCart = (product) => {
     if (!product) return;
-    dispatch(
-      addProduct(product)
-    );
+    if (!currentUser) dispatch(changeLoginModal(true));
+    else {
+      dispatch(addProduct(product));
+      props.notify();
+    }
   };
+
   return (
     <div>
       <div className="product-card">

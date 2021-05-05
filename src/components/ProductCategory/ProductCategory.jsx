@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 import { fetchProductsStart, setProducts, setProduct } from "../../redux/Products/products.action";
 import { useSelector } from "react-redux";
 import withTranslator from "../../hoc/withTranslation";
+import { ToastContainer, toast } from 'react-toastify';
 const SHIMMER_CARDS_LENGTH = 3;
 const shimmerArray = new Array(SHIMMER_CARDS_LENGTH).fill(undefined);
 
@@ -18,6 +19,7 @@ function ProductCategory(props) {
   const dispatch = useDispatch();
   const { filterType } = useParams();
   const { products } = useSelector(mapState);
+  const notify = () => toast.success("Item added to your Bag!");
 
   useEffect(() => {
     dispatch(fetchProductsStart({ filterType }))
@@ -35,6 +37,7 @@ function ProductCategory(props) {
 
   return (
     <div className="product-category-wrapper">
+      <ToastContainer className="toast" />
       <h3 className="products-main-header">
         {filterType && filterType}
         {!filterType && "New Arrival"}
@@ -47,6 +50,7 @@ function ProductCategory(props) {
           return <Product
             key={pos}
             product={configProduct}
+            notify={notify}
           />
         })}
         {products.length < 1 && shimmerArray.map((pos) => {
@@ -60,7 +64,7 @@ function ProductCategory(props) {
                 </div>
 
               </div>
-              <button className="product-btn">{props.strings.AddToCart}</button>
+              <button className="product-btn" >{props.strings.AddToCart}</button>
             </div>)
         })}
       </div>

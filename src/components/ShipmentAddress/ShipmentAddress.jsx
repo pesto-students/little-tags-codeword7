@@ -7,6 +7,7 @@ import { selectCartItems, selectCartTotal, selectCartItemsCount } from "../../re
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrderHistory } from '../../redux/Orders/orders.action';
+import { userCheckedInSucess } from '../../redux/User/user.actions';
 import { addAddressModal } from '../../redux/User/user.actions'
 import { loadStripe } from '@stripe/stripe-js';
 import withTranslator from "../../hoc/withTranslation";
@@ -66,6 +67,7 @@ function ShipmentAddress(props) {
       }
       )
     };
+    dispatch(userCheckedInSucess(true));
     dispatch(
       saveOrderHistory(configOrder)
     );

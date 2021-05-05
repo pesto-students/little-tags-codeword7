@@ -14,7 +14,7 @@ import { BiLogOut } from 'react-icons/bi';
 // import FirebaseContext from '../../Config/Firebase/context';
 import { Link } from 'react-router-dom';
 // import { signOutUser } from '../../redux/User/user.sagas';
-import { signOutUserStart } from '../../redux/User/user.actions';
+import { signOutUserStart, changeLoginModal } from '../../redux/User/user.actions';
 // import { languageOptions } from '../../Lang';
 import withTranslator from '../../hoc/withTranslation';
 import Dropdown from '../../UI/Dropdown/Dropdown';
@@ -124,7 +124,7 @@ function HeaderComponent(props) {
         <Dropdown />
 
         {!currentUser &&
-          [<div className='login' onClick={() => setIsLoginModal(!isLoginModal)}>
+          [<div className='login' onClick={() => dispatch(changeLoginModal(true))}>
             <BiLogIn className="login-user-icon" /><span className="login-header-title">{props.strings.Login}</span>
           </div>
           ]}

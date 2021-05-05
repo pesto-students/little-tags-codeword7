@@ -41,3 +41,12 @@ export const addUserAddressFlag = (userAddressFlagValue) => ({
   payload: userAddressFlagValue
 })
 
+export const facebookSignInStart = () => ({
+  type: userTypes.FACEBOOK_SIGN_IN_START
+})
+
+export const changeLoginModal = (loginModalFlag) => ({
+  type: userTypes.IS_LOGIN_MODAL_OPEN,
+  payload: loginModalFlag
+})
+

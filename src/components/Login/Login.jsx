@@ -5,17 +5,20 @@ import { AiOutlineGoogle } from 'react-icons/ai';
 import { GrFormClose } from 'react-icons/gr';
 import FirebaseContext from '../../Config/Firebase/context';
 import { useDispatch } from 'react-redux';
-import { googleSignInStart } from '../../redux/User/user.actions';
+import { googleSignInStart, facebookSignInStart, changeLoginModal } from '../../redux/User/user.actions';
 import withTranslator from '../../hoc/withTranslation';
+import { useSelector } from 'react-redux';
 
-// const mapState = ({ user }) => ({
-//     currentUser: user.currentUser
-// })
+
+const mapState = ({ user }) => ({
+    currentUser: user.currentUser,
+    loginModalFlag: user.loginModalFlag
+})
 
 const Login = (props) => {
     const firebase = useContext(FirebaseContext);
     const dispatch = useDispatch();
-    // const { currentUser } = useSelector(mapState);
+    const { loginModalFlag } = useSelector(mapState);
 
     const handleGoogleSignIn = () => {
         dispatch(googleSignInStart());
@@ -23,21 +26,18 @@ const Login = (props) => {
     }
 
     const doFacebookSignIn = () => {
-        firebase.doFacebookSignIn().then((facebookUser) => {
-            console.log(facebookUser);
-        })
-            .catch((error) => {
-                console.log(error.message);
-            })
+        dispatch(facebookSignInStart());
+        props.setIsLoginModal(false);
     }
 
     const doPhoneNoSignIn = () => {
         props.setIsLoginModal(false);
         firebase.doPhoneNoSignIn();
     }
+
     return (
-        <div className={props.isLoginModal ? 'forms-wrapper' : 'forms-wrapper-hide'}>
-            <div className="close-btn" onClick={() => props.setIsLoginModal(false)}><GrFormClose className="close-btn-icon" /></div>
+        <div className={loginModalFlag ? 'forms-wrapper' : 'forms-wrapper-hide'}>
+            <div className="close-btn" onClick={() => dispatch(changeLoginModal(false))}><GrFormClose className="close-btn-icon" /></div>
             <div className="title"><h3 className="title-1">We're glad you're here. <br />{props.strings.WelcomeToXyz}</h3></div>
             <div><button className="facebook-btn" onClick={doFacebookSignIn}><ImFacebook className="facebook-icon" /><span className="connect-fb">{props.strings.ConnectWithFacebook}</span></button></div>
             <div><button className="google-btn" onClick={handleGoogleSignIn}><AiOutlineGoogle className="facebook-icon" /><span className="connect-fb">{props.strings.ConnectWithGoogle}</span></button></div>
@@ -45,7 +45,6 @@ const Login = (props) => {
             {/* <div className="email-text">Enter Your Mobile Number</div>
             <input type="text" className="input-number" placeholder="Enter your Mobile Number" /> */}
             <div><button className="email-btn" onClick={doPhoneNoSignIn}>{props.strings.ContinueWithMobileNumber}</button></div>
-
         </div>
     );
 }

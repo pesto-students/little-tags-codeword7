@@ -15,6 +15,7 @@ import OrderHistory from './components/OrderHistory/OrderHistory';
 import OrderSuccessConfirmation from './components/OrderSuccessConfirmation/OrderSuccessConfirmation';
 import DashboardLayout from './layout/DashboardLayout/DashboardLayout';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = ({ userCheck, userAddressFlag }) => {
 
