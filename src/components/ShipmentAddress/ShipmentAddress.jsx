@@ -1,47 +1,45 @@
 import "./ShipmentAddress.scss";
-import FormInput from '../../UI/FormInput/FormInput';
-import React, { useState } from "react";
+// import FormInput from '../../UI/FormInput/FormInput';
+import priceFormatter from '../../Utility/priceFormatter';
+import React from "react";
 import { createStructuredSelector } from "reselect";
 import { selectCartItems, selectCartTotal, selectCartItemsCount } from "../../redux/Cart/cart.selector";
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrderHistory } from '../../redux/Orders/orders.action';
+import { userCheckedInSucess } from '../../redux/User/user.actions';
+import { addAddressModal } from '../../redux/User/user.actions'
 import { loadStripe } from '@stripe/stripe-js';
+import withTranslator from "../../hoc/withTranslation";
+import { BsPlusCircle } from 'react-icons/bs';
+import AddressDetailCard from '../AddressDetailCard/AddressDetailCard'
 const stripePromise = loadStripe('pk_test_RL2GR96Y8K0U9JkBXnks2v2v');
 
 
-const initialAddressState = {
-  line1: '',
-  line2: '',
-  city: '',
-  state: '',
-  postal_code: '',
-}
+
+
 
 const mapState = createStructuredSelector({
   total: selectCartTotal,
   itemCount: selectCartItemsCount,
   cartItems: selectCartItems
+});
+
+const userMapState = ({ user }) => ({
+  userAddress: user.currentUser.userAddress
 })
 
-export default function ShipmentAddress() {
+function ShipmentAddress(props) {
 
-  const [recipientFirstName, setRecipientFirstName] = useState('');
-  const [recipientLastName, setRecipientLastName] = useState('');
-  const [billingAddress, setBillingAddress] = useState({ ...initialAddressState });
-  const [contactNo, setContactNo] = useState('');
-  const [emailId, setEmailId] = useState('');
+
   const { cartItems, total } = useSelector(mapState);
+  const { userAddress } = useSelector(userMapState);
   const dispatch = useDispatch();
   const history = useHistory();
+  let selectedUserAddress = {};
 
-  const handleShipping = async (evt) => {
-
-    const { name, value } = evt.target;
-    setBillingAddress({
-      ...billingAddress,
-      [name]: value
-    })
+  const onAddressChanged = (event) => {
+    selectedUserAddress = userAddress[event.target.value];
   }
 
   const handleFormSubmit = async () => {
@@ -61,13 +59,15 @@ export default function ShipmentAddress() {
     });
     const configOrder = {
       orderTotal: total,
-      userName: recipientFirstName + recipientLastName,
+      userData: selectedUserAddress,
+      // userName: recipientFirstName + recipientLastName,
       orderItems: cartItems.map(item => {
         const { id, image, title, price, quantity } = item;
         return { id, image, title, price, quantity }
       }
       )
     };
+    dispatch(userCheckedInSucess(true));
     dispatch(
       saveOrderHistory(configOrder)
     );
@@ -94,114 +94,32 @@ export default function ShipmentAddress() {
   }
 
 
+
+
   return (
     <div className="checkout">
       <div className="address">
         <div className="title">
-          <h3 className="billing-title">Billing and Shipping</h3>
+          <h3 className="billing-title">{props.strings.BillingAndShipping}</h3>
         </div>
-        <div className="shipping-form">
-          <form>
-            <div className="form-name-wrapper">
-              <div className="form-group">
-                <label className="form-label">First Name</label>
-                <FormInput
-                  placeholder="First Name"
-                  name="recipientFirstName"
-                  handleOnChange={evt => setRecipientFirstName(evt.target.value)}
-                  value={recipientFirstName}
-                  type="text"
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label">Last Name</label>
-                <FormInput
-                  placeholder="Last Name"
-                  name="recipientLastName"
-                  handleOnChange={evt => setRecipientLastName(evt.target.value)}
-                  value={recipientFirstName}
-                  type="text"
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <label className="form-label">Street Address</label>
-              <FormInput
-                placeholder="Street Address1"
-                name="line1"
-                handleOnChange={evt => handleShipping(evt)}
-                value={billingAddress.line1}
-                type="text"
-              />
-              <FormInput
-                placeholder="Street Address2"
-                name="line2"
-                handleOnChange={evt => handleShipping(evt)}
-                value={billingAddress.line2}
-                type="text"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Town / City</label>
-              <FormInput
-                placeholder="City"
-                name="city"
-                handleOnChange={evt => handleShipping(evt)}
-                value={billingAddress.city}
-                type="text"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">State</label>
-              <FormInput
-                placeholder="State"
-                name="state"
-                handleOnChange={evt => handleShipping(evt)}
-                value={billingAddress.state}
-                type="text"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Postal / ZIP</label>
-              <FormInput
-                placeholder="State"
-                name="postal_code"
-                handleOnChange={evt => handleShipping(evt)}
-                value={billingAddress.postal_code}
-                type="text"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Phone</label>
-              <FormInput
-                placeholder="Contact Number"
-                name="contactNo"
-                handleOnChange={evt => setContactNo(evt)}
-                value={contactNo}
-                type="text"
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Email Addrss</label>
-              <FormInput
-                placeholder="Email Address"
-                name="emailId"
-                handleOnChange={evt => setEmailId(evt.target.value)}
-                value={emailId}
-                type="text"
-              />
-            </div>
-          </form>
+        <div className="shipping-address-data">
+          {userAddress.length > 0 && userAddress.map((address, index) =>
+            <AddressDetailCard Address={address} index={index} onAddressChanged={onAddressChanged} />
+          )}
+
+          <div className="shipping-address">
+            <BsPlusCircle className="add-circle" onClick={() => dispatch(addAddressModal(true))} /><span className="add-new-address-text">Add new Address</span>
+          </div>
         </div>
       </div>
       <div className="payment">
         <div className="title">
-          <h3 className="billing-title">My Orders</h3>
+          <h3 className="billing-title">{props.strings.MyOrders}</h3>
         </div>
         <div className="products">
           <div className="product-title-group">
-            <div className="product-title-label product-label-1">Product</div>
-            <div className="product-title-label">Total</div>
+            <div className="product-title-label product-label-1">{props.strings.Product}</div>
+            <div className="product-title-label">{props.strings.GrandTotal}</div>
           </div>
           <div className="checkout-products">
             {cartItems.map(item => {
@@ -209,13 +127,13 @@ export default function ShipmentAddress() {
                 <div className="product-wrap">
                   <div className="checkout-product">
                     <img
-                      src={item.image}
+                      src={item.image[0]}
                       alt=""
                       className="checkout-product-img"
                     />
                     <h6 className="product-label">{item.title}</h6>
                     <div>
-                      <h6 className="checkout-product-price">{item.price}</h6>
+                      <h6 className="checkout-product-price">{priceFormatter(item.price)}</h6>
                     </div>
                   </div>
                 </div>
@@ -224,17 +142,17 @@ export default function ShipmentAddress() {
             <div className="product-wrap">
               <div className="checkout-total-wrap">
                 <div className="checkout-total">
-                  <div className="checkout-total-title">Subtotal</div>
-                  <div className="checkout-product-value">{total}</div>
+                  <div className="checkout-total-title">{props.strings.Subtotal}</div>
+                  <div className="checkout-product-value">{priceFormatter(total)}</div>
                 </div>
                 <div className="checkout-total">
-                  <div className="checkout-total-title">Shipping</div>
-                  <div className="checkout-product-value">Free</div>
+                  <div className="checkout-total-title">{props.strings.Shipping}</div>
+                  <div className="checkout-product-value">{props.strings.Free}</div>
                 </div>
                 <div className="checkout-total">
-                  <div className="checkout-total-title">Total</div>
+                  <div className="checkout-total-title">{props.strings.GrandTotal}</div>
                   <div className="checkout-product-value total-checkout-price">
-                    {total}
+                    {priceFormatter(total)}
                   </div>
                 </div>
               </div>
@@ -242,7 +160,7 @@ export default function ShipmentAddress() {
 
             <div className="product-wrap">
               <div className="product-checkout-btn" onClick={handleFormSubmit}>
-                <button className="payment-checkout-button">Place Order</button>
+                <button className="payment-checkout-button">{props.strings.PlaceOrder}</button>
               </div>
             </div>
           </div>
@@ -251,3 +169,19 @@ export default function ShipmentAddress() {
     </div>
   );
 }
+
+ShipmentAddress.defaultProps = {
+  strings: {
+    BillingAndShipping: "Billing and Shipping",
+
+    MyOrders: "MyOrders",
+    Product: "Product",
+    Subtotal: "Subtotal",
+    Shipping: "Shipping",
+    Free: "Free",
+    GrandTotal: "Grand Total",
+    PlaceOrder: "Place Order"
+  }
+}
+
+export default withTranslator('ShipmentAddress')(ShipmentAddress);

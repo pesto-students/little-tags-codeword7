@@ -4,8 +4,9 @@ import React from "react";
 import "./Footer.scss";
 import { FaCcMastercard, FaCcVisa, FaCcPaypal } from "react-icons/fa";
 import { AiFillAmazonSquare } from "react-icons/ai";
+import withTranslator from "../../hoc/withTranslation";
 
-export default function Footer() {
+function Footer(props) {
   return (
     <footer>
       <div className="main-part">
@@ -14,18 +15,18 @@ export default function Footer() {
           <ul className="footer-list">
             <li className="footer-list-item">
               <a href="#" className="footer-list-link">
-                Phone: (+91) 9876 543 210
+                {props.strings.Phone}: (+91) 9876 543 210
               </a>
             </li>
             <li className="footer-list-item">
               <a href="#" className="footer-list-link">
-                Address: 1418 Riverwood Drive, Suite 3245, Cottonwood, CA 96052,
+                {props.strings.Address}: 1418 Riverwood Drive, Suite 3245, Cottonwood, CA 96052,
                 United States
               </a>
             </li>
             <li className="footer-list-item">
               <a href="#" className="footer-list-link">
-                We accept
+                {props.strings.WeAaccept}
               </a>
             </li>
             <li className="footer-list-item footer-payment">
@@ -45,49 +46,71 @@ export default function Footer() {
           </ul>
         </div>
         <div className="footer-category">
-          <h3 className="footer-heading">Category</h3>
+          <h3 className="footer-heading">{props.strings.Category}</h3>
           <ul className="footer-list">
             <li className="footer-list-item">
               <a href="#" className="footer-list-link">
-                Accessories
+                {props.strings.MenClothing}
               </a>
             </li>
             <li className="footer-list-item">
               <a href="#" className="footer-list-link">
-                Jeans
+                {props.strings.WomenClothing}
               </a>
             </li>
             <li className="footer-list-item">
               <a href="#" className="footer-list-link">
-                Tops
+                {props.strings.Jewelery}
               </a>
             </li>
             <li className="footer-list-item">
               <a href="#" className="footer-list-link">
-                Jackets
+                {props.strings.Electronics}
               </a>
             </li>
           </ul>
         </div>
         <div className="subscribe">
-          <h3 className="footer-heading">Let's saty in touch</h3>
+          <h3 className="footer-heading">{props.strings.LetsSatyInTouch}</h3>
           <form className="subscribe-input">
             <input type="text" className="footer-input" />
-            <button className="footer-btn">Subscribe</button>
+            <button className="footer-btn">{props.strings.Subscribe}</button>
           </form>
           <p className="footer-paragraph">
-            keep up to date with our latest news and special offers
+            {props.strings.keepUpToDateWithOurLatestNewsAndSpecialOffers}
           </p>
         </div>
       </div>
       <div className="creator-part">
         <div className="copyright-text">
-          <p>Copyright &copy; 2021. Little Tags website. All Rights Reserved</p>
+          <p>{props.strings.Copyright} &copy; 2021. {props.strings.LittleTagsWebsiteAllRightsReserved}</p>
         </div>
         <div className="text-right">
-          <p>Made by Mihir and Niraj</p>
+          <p>{props.strings.MadeByMihirAndNiraj}</p>
         </div>
       </div>
     </footer>
   );
 }
+
+Footer.defaultProps = {
+  strings: {
+    ContactInfo: "Contact Info",
+    Phone: "Phone",
+    Address: "Address",
+    WeAaccept: "We accept",
+    Category: "Category",
+    MenClothing: "Men Clothing",
+    WomenClothing: "Women Clothing",
+    Jewelery: "Jewelery",
+    Electronics: "Electronics",
+    LetsSatyInTouch: "Let's saty in touch",
+    Subscribe: "Subscribe",
+    keepUpToDateWithOurLatestNewsAndSpecialOffers: "keep up to date with our latest news and special offers",
+    Copyright: "Copyright",
+    LittleTagsWebsiteAllRightsReserved: "Little Tags website. All Rights Reserved",
+    MadeByMihirAndNiraj: "Made by Mihir and Niraj"
+  }
+}
+
+export default withTranslator('Footer')(Footer);

@@ -1,21 +1,30 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router';
+import { BiPlus, BiMinus } from "react-icons/bi";
 import './ProductDesc.scss';
 // eslint-disable-next-line
-import { setProduct, fetchProductStart } from '../../redux/Products/products.action';
+import { setProduct, fetchProductStart, setProducts } from '../../redux/Products/products.action';
+import withTranslator from '../../hoc/withTranslation';
+import priceFormatte from '../../Utility/priceFormatter';
+import { addProduct } from '../../redux/Cart/cart.action';
+import { changeLoginModal } from '../../redux/User/user.actions'
+
 
 const mapState = state => ({
-  product: state.productsData.product
+  product: state.productsData.product,
+  currentUser: state.user.currentUser
 })
 
-function ProductDesc() {
+
+function ProductDesc(props) {
 
   const dispatch = useDispatch();
   const { productID } = useParams();
-  const { product } = useSelector(mapState);
+  const { product, currentUser } = useSelector(mapState);
 
   const { sliderImages, image, size, title, price, description } = product;
+  // console.log('products', product)
   // eslint-disable-next-line
   useEffect(() => {
 
@@ -24,12 +33,14 @@ function ProductDesc() {
     );
 
     return () => {
+      setProducts([]);
       setProduct({})
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [qty, setQty] = useState(1);
 
   const myRef = useRef()
 
@@ -37,8 +48,37 @@ function ProductDesc() {
   //   myRef.current.children[index].className = "active";
   // }, [index])
 
+  const addCartItem = (product) => {
+    setQty((prevState) => prevState + 1)
+    // dispatch(
+    //   addProduct(product)
+    // );
+  }
+
+  const reduceCartItem = (product) => {
+    if (qty > 1) {
+      setQty((prevState) => prevState - 1)
+      // dispatch(
+      //   reduceCartProduct(product)
+      // );
+    }
+  }
+
+  const handleAddToCart = (product) => {
+    if (!product) return;
+    if (!currentUser) dispatch(changeLoginModal(true));
+    else {
+      product.itemQty = qty
+      dispatch(addProduct(product));
+      // props.notify();
+    }
+  };
+
+  const handleSize = index => {
+    console.log(index)
+  }
   const handleTab = index => {
-    // setIndex(index)
+    setIndex(index)
     const images = myRef.current.children;
     for (let i = 0; i < images.length; i++) {
       images[i].className = images[i].className.replace("active", "");
@@ -53,18 +93,20 @@ function ProductDesc() {
     <div className="app">
       <div className="details">
         <div className="big-img">
-          <img src={image} alt="" />
+          <img src={image[index]} alt="" />
         </div>
 
         <div className="box">
           <div className="row">
             <h2>{title}</h2>
-            <span>₹{price}</span>
           </div>
-          <div className="colors">
+          <div className="row">
+            <span>{priceFormatte(price)}</span>
+          </div>
+          <div className="size-btn">
             {
               size.map((itemSize, index) => (
-                <button key={index}>{itemSize}</button>
+                <button key={index} onClick={() => handleSize(index)}>{itemSize}</button>
               ))
             }
           </div>
@@ -82,12 +124,26 @@ function ProductDesc() {
               ))
             }
           </div>
-          <button className="cart">Add to cart</button>
-
+          <div className="qty-wrapper">
+            <div className="quantity">
+              <div className="item-qty">
+                <BiMinus onClick={() => reduceCartItem(product)} />
+                <div>{qty}</div>
+                <BiPlus onClick={() => addCartItem(product)} />
+              </div>
+            </div>
+          </div>
+          <button className="cart" onClick={() => handleAddToCart(product)}>{props.strings.AddToCart}</button>
         </div>
       </div>
     </div>
   )
 }
 
-export default ProductDesc;
+ProductDesc.defaultProps = {
+  strings: {
+    AddToCart: "Add to Cart"
+  }
+}
+
+export default withTranslator('ProductDescComponent')(ProductDesc);

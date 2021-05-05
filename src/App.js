@@ -4,9 +4,9 @@ import * as ROUTES from './constants/routes';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
 import withAuthenticaton from './hoc/withAuthentication';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { checkUserSession } from './redux/User/user.actions';
+// import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
+// import { checkUserSession } from './redux/User/user.actions';
 import ProductCategory from './components/ProductCategory/ProductCategory';
 import MainLayout from './layout/MainLayout';
 import ShipmentAddress from './components/ShipmentAddress/ShipmentAddress';
@@ -15,17 +15,18 @@ import OrderHistory from './components/OrderHistory/OrderHistory';
 import OrderSuccessConfirmation from './components/OrderSuccessConfirmation/OrderSuccessConfirmation';
 import DashboardLayout from './layout/DashboardLayout/DashboardLayout';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import 'react-toastify/dist/ReactToastify.css';
 
-const App = () => {
+const App = ({ userCheck, userAddressFlag }) => {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(checkUserSession());
-  })
+  // useEffect(() => {
+  //   dispatch(checkUserSession());
+  // })
   return (
     // <Dashboard />
-    <div className="main-app">
+    <div className={(userCheck || userAddressFlag) ? 'main-app-check' : 'main-app'}>
       <BrowserRouter>
         <ScrollToTop />
         <Switch>

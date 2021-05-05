@@ -6,13 +6,19 @@ import reportWebVitals from './reportWebVitals';
 // import FirebaseContext from './Config/Firebase/context';
 // import Firebase from './Config/Firebase/Firebase';
 import { Provider } from 'react-redux';
-import store from './redux/createStore';
+import { store, persistor } from './redux/createStore';
+import { PersistGate } from 'redux-persist/integration/react'
+import { LanguageProvider } from './Config/Language';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-        <App />
-    </Provider>
+    <LanguageProvider>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
+    </LanguageProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

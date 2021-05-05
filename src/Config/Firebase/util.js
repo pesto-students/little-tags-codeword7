@@ -18,6 +18,9 @@ export const firestore = firebase.firestore();
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider();
 GoogleProvider.setCustomParameters({ prompt: 'select_account' });
 
+export const FacebookProvider = new firebase.auth.FacebookAuthProvider();
+FacebookProvider.setCustomParameters({ prompt: 'select_account' });
+
 export const handelUserProfile = async ({ userAuth, additionalData }) => {
     if (!userAuth) return;
 
@@ -35,6 +38,7 @@ export const handelUserProfile = async ({ userAuth, additionalData }) => {
                 displayName,
                 email,
                 createdDate: timeStamp,
+                userAddress: [],
                 ...additionalData
             })
         } catch (err) {
@@ -45,11 +49,11 @@ export const handelUserProfile = async ({ userAuth, additionalData }) => {
 }
 
 export const getCurrentUser = () => {
-    console.log("In get Current User");
     return new Promise((resolve, reject) => {
         const unsubscribe = auth.onAuthStateChanged(userAuth => {
             unsubscribe();
             resolve(userAuth);
-        })
+        }, reject);
+
     })
 }
