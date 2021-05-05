@@ -7,19 +7,24 @@ import './ProductDesc.scss';
 import { setProduct, fetchProductStart, setProducts } from '../../redux/Products/products.action';
 import withTranslator from '../../hoc/withTranslation';
 import priceFormatte from '../../Utility/priceFormatter';
-import { addProduct, reduceCartProduct } from '../../redux/Cart/cart.action';
+import { addProduct } from '../../redux/Cart/cart.action';
+import { changeLoginModal } from '../../redux/User/user.actions'
+
 
 const mapState = state => ({
-  product: state.productsData.product
+  product: state.productsData.product,
+  currentUser: state.user.currentUser
 })
+
 
 function ProductDesc(props) {
 
   const dispatch = useDispatch();
   const { productID } = useParams();
-  const { product } = useSelector(mapState);
+  const { product, currentUser } = useSelector(mapState);
 
   const { sliderImages, image, size, title, price, description } = product;
+  // console.log('products', product)
   // eslint-disable-next-line
   useEffect(() => {
 
@@ -35,6 +40,7 @@ function ProductDesc(props) {
   }, []);
 
   const [index, setIndex] = useState(0);
+  const [qty, setQty] = useState(1);
 
   const myRef = useRef()
 
@@ -43,16 +49,30 @@ function ProductDesc(props) {
   // }, [index])
 
   const addCartItem = (product) => {
-    dispatch(
-      addProduct(product)
-    );
+    setQty((prevState) => prevState + 1)
+    // dispatch(
+    //   addProduct(product)
+    // );
   }
 
   const reduceCartItem = (product) => {
-    dispatch(
-      reduceCartProduct(product)
-    );
+    if (qty > 1) {
+      setQty((prevState) => prevState - 1)
+      // dispatch(
+      //   reduceCartProduct(product)
+      // );
+    }
   }
+
+  const handleAddToCart = (product) => {
+    if (!product) return;
+    if (!currentUser) dispatch(changeLoginModal(true));
+    else {
+      product.itemQty = qty
+      dispatch(addProduct(product));
+      // props.notify();
+    }
+  };
 
   const handleSize = index => {
     console.log(index)
@@ -107,13 +127,13 @@ function ProductDesc(props) {
           <div className="qty-wrapper">
             <div className="quantity">
               <div className="item-qty">
-                <BiMinus />
-                <div>1</div>
-                <BiPlus />
+                <BiMinus onClick={() => reduceCartItem(product)} />
+                <div>{qty}</div>
+                <BiPlus onClick={() => addCartItem(product)} />
               </div>
             </div>
           </div>
-          <button className="cart">{props.strings.AddToCart}</button>
+          <button className="cart" onClick={() => handleAddToCart(product)}>{props.strings.AddToCart}</button>
         </div>
       </div>
     </div>

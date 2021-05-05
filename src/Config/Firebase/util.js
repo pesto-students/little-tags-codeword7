@@ -38,6 +38,7 @@ export const handelUserProfile = async ({ userAuth, additionalData }) => {
                 displayName,
                 email,
                 createdDate: timeStamp,
+                userAddress: [],
                 ...additionalData
             })
         } catch (err) {

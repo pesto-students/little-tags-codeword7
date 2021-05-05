@@ -127,7 +127,7 @@ function ShipmentAddress(props) {
                 <div className="product-wrap">
                   <div className="checkout-product">
                     <img
-                      src={item.image}
+                      src={item.image[0]}
                       alt=""
                       className="checkout-product-img"
                     />

@@ -24,7 +24,7 @@ export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
         ...prevCartItems,
         {
             ...nextCartItem,
-            quantity: quantityIncrement
+            quantity: nextCartItem.itemQty ? nextCartItem.itemQty : quantityIncrement,
         }
     ]
 }

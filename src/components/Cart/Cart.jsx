@@ -52,7 +52,7 @@ function Cart(props) {
               return (
                 <div className="bag-item">
                   <img
-                    src={item.image}
+                    src={item.image[0]}
                     alt=""
                     className="item-img"
                   />
