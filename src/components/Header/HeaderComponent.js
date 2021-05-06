@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import './HeaderComponent.scss'
 import DrawerToggle from '../DrawerToggle/DrawerToggle';
 import { FaShoppingCart } from 'react-icons/fa';
 // import { AiOutlineSearch } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
+import { FaShoppingBag } from 'react-icons/fa';
 import Sidebar from '../Sidebar/Sidebar';
 import Login from '../Login/Login';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,15 +19,20 @@ import { signOutUserStart, changeLoginModal } from '../../redux/User/user.action
 // import { languageOptions } from '../../Lang';
 import withTranslator from '../../hoc/withTranslation';
 import Dropdown from '../../UI/Dropdown/Dropdown';
+import { fetchProductsStart } from "../../redux/Products/products.action";
+import { useHistory } from "react-router";
 
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
-  totalNumberOfCartItem: selectCartItemsCount(state)
+  totalNumberOfCartItem: selectCartItemsCount(state),
+  products: state.productsData.products
 });
 
 const SearchBar = (props) => {
-  const { options, onInputChange } = props;
+  const { options, onInputChange, handleSelectProduct } = props;
+
+
   return (
     <div className='SearchBar'>
       <div className="search-input">
@@ -37,12 +43,15 @@ const SearchBar = (props) => {
         <div className="search-result">
           {options.map((option, index) =>
           (
-            <div className="search-item-result">
+            <div className="search-item-result" onClick={() => handleSelectProduct(option.id)}>
               <div >
-                <img className="search-img" src={option.src} alt="Nothing" />
+                <img className="search-img" src={option.image[0]} alt="Nothing" />
               </div>
               <div className="search-result-title">
                 {option.title}
+              </div>
+              <div className="search-category">
+                ({option.category})
               </div>
             </div>
           )
@@ -52,56 +61,41 @@ const SearchBar = (props) => {
     </div>
   )
 }
-const defaultOptions = [
-  {
-    "_id": "1",
-    "title": "Nike Shoes",
-    "src": [
-      "https://picsum.photos/id/0/300/200",
-    ],
-    "description": "Description of product",
-    "price": 23,
-    "size": ["xl", "xs", "s"],
-    "quantity": 10
-  },
-  {
-    "_id": "1",
-    "title": "Headset",
-    "src": [
-      "https://picsum.photos/id/0/300/200",
-    ],
-    "description": "Description of product",
-    "price": 23,
-    "size": ["xl", "xs", "s"],
-    "quantity": 10
-  }
-];
 
 function HeaderComponent(props) {
   const [isSidebar, setIsSidebar] = useState(false);
   const [isLoginModal, setIsLoginModal] = useState(false);
   const [options, setOptions] = useState([])
-  const { currentUser, totalNumberOfCartItem } = useSelector(mapState);
+  const { currentUser, totalNumberOfCartItem, products } = useSelector(mapState);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const signOut = () => {
     dispatch(signOutUserStart());
   }
 
+  useEffect(() => {
+    dispatch(fetchProductsStart({}))
+  }, []);
+
+  const handleSelectProduct = (id) => {
+    console.log(id);
+    setOptions([]);
+    history.push(`/product/${id}`);
+  }
+
   const onInputChange = (event) => {
     const value = event.target.value;
-    console.log(value);
-    if (value === "") {
-      setOptions([]);
-    } else {
-      const searchArray = defaultOptions.map(item => {
+    console.log(value.length);
+    if (value === "" || value.length < 3) setOptions([]);
+    else {
+      const searchArray = products.map(item => {
         return {
-          ...item,
-          title: item.title.toLocaleLowerCase()
+          ...item
         }
       }
       );
-      setOptions(searchArray.filter((option) => option.title.includes(value.toLocaleLowerCase())))
+      setOptions(searchArray.filter((option) => option.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())))
     }
   }
 
@@ -119,7 +113,11 @@ function HeaderComponent(props) {
           </Link>
         </div>
 
-        <SearchBar options={options} onInputChange={onInputChange} />
+        <SearchBar
+          options={options}
+          onInputChange={onInputChange}
+          setOptions={setOptions}
+          handleSelectProduct={handleSelectProduct} />
 
         <Dropdown />
 
@@ -135,7 +133,7 @@ function HeaderComponent(props) {
               <FaUser className="login-icon" /><span className="login-title">{currentUser.displayName}</span>
             </div>
             <div className='login-item'>
-              <FaShoppingCart className="login-icon header-cart-icon" /><span ><Link className="header-cart-icon" to="/cart">
+              <FaShoppingBag className="login-icon header-cart-icon" /><span ><Link className="header-cart-icon" to="/cart">
                 {props.strings.YourBag} ({totalNumberOfCartItem})
                 </Link></span>
             </div>

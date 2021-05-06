@@ -8,7 +8,8 @@ import { setProduct, fetchProductStart, setProducts } from '../../redux/Products
 import withTranslator from '../../hoc/withTranslation';
 import priceFormatte from '../../Utility/priceFormatter';
 import { addProduct } from '../../redux/Cart/cart.action';
-import { changeLoginModal } from '../../redux/User/user.actions'
+import { changeLoginModal } from '../../redux/User/user.actions';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const mapState = state => ({
@@ -66,6 +67,7 @@ function ProductDesc(props) {
 
   const handleAddToCart = (product) => {
     if (!product) return;
+    notify();
     if (!currentUser) dispatch(changeLoginModal(true));
     else {
       product.itemQty = qty
@@ -73,6 +75,8 @@ function ProductDesc(props) {
       // props.notify();
     }
   };
+
+  const notify = () => toast.success("Item added to your Bag!");
 
   const handleSize = index => {
     console.log(index)
@@ -91,6 +95,7 @@ function ProductDesc(props) {
 
   return (
     <div className="app">
+      <ToastContainer className="toast" />
       <div className="details">
         <div className="big-img">
           <img src={image[index]} alt="" />
