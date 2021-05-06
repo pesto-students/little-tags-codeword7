@@ -16,6 +16,6 @@ html {
 
 @media(max-width:425px) {
     html {
-        width: 104%;
+        width: 100%;
     }
   }

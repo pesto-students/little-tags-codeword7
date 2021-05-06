@@ -65,7 +65,7 @@ export default {
     },
     LoginComponent: {
         WereGladYoureHere: "We're glad you're here.",
-        WelcomeToXyz: "Welcome to XYZ",
+        WelcomeToXyz: "Welcome to Little Tag",
         ConnectWithFacebook: "Connect with Facebook",
         ConnectWithGoogle: "Connect with Google",
         Or: "Or",
@@ -73,13 +73,13 @@ export default {
     },
     ProductComponent: {
         Price: "Price",
-        AddtoCart: "Add to Cart"
+        AddtoCart: "Add to Bag"
     },
     ProductCategoryComponent: {
-        AddToCart: "Add to Cart"
+        AddToCart: "Add to Bag"
     },
     ProductDescComponent: {
-        AddToCart: "Add to Cart"
+        AddToCart: "Add to Bag"
     },
     CartComponent: {
         YourBag: "Your Bag",

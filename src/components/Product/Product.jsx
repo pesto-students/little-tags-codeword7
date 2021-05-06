@@ -42,7 +42,7 @@ function Product(props) {
 Product.defaultProps = {
   strings: {
     Price: "Price",
-    AddtoCart: "Add to Cart"
+    AddtoCart: "Add to Bag"
   }
 }
 

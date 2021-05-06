@@ -3,8 +3,18 @@ import React from "react";
 import "./Sidebar.scss";
 import { Link } from 'react-router-dom';
 import withTranslator from "../../hoc/withTranslation";
+import { useDispatch } from "react-redux";
+import { addAddressModal } from '../../redux/User/user.actions'
+
 
 function Sidebar(props) {
+
+  const dispatch = useDispatch();
+
+  const openAddressModal = () => {
+    props.setIsSidebar(false)
+    dispatch(addAddressModal(true));
+  }
   return (
     <div className={props.isSidebar ? 'openSidebar' : 'closeSidebar'}>
       {/* <div className="greeting">Hey Mihir</div> */}
@@ -44,7 +54,7 @@ function Sidebar(props) {
             </Link>
           </li>
           <li className="navigation-item">
-            <a href="#" onClick={() => props.setIsSidebar(false)} className="order-navigation-link">
+            <a href="#" onClick={openAddressModal} className="order-navigation-link">
               {props.strings.AddAddress}
             </a>
           </li>

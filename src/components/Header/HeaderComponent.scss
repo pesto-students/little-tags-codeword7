@@ -101,10 +101,14 @@
   width: 97.5%;
   background-color: white;
   position: absolute;
+  cursor: pointer;
 }
 .search-result-title {
   padding: 1rem;
   font-size: 1.5rem;
+  overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .search-input {
   position: relative;
@@ -115,7 +119,11 @@
 }
 .search-img {
   width: 3rem;
-  height: 3rem;
+}
+.search-category {
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+    margin: 1rem 0;
 }
 
 @media(max-width:1024px) {
@@ -173,8 +181,7 @@
     }
 }
 
-@media(max-width: 320px) {
-  
+@media(max-width: 370px) {
   .logo {
     margin-left: 1rem;
     a {
@@ -182,11 +189,11 @@
     }
   }
   .SearchBar {
-    width: 35%;
+    width: 30%;
     margin-left: 1rem;
   }
   .cartContainer {
-    width: 30rem;
+    width: 28rem;
   }
   
 }
