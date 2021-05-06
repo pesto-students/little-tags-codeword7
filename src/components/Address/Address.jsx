@@ -52,7 +52,7 @@ const Address = (props) => {
                 <form onSubmit={submitAddress}>
                     <div className="form-name-wrapper">
                         <div className="form-group">
-                            <label className="form-label">{props.strings.FirstName}</label>
+                            <label className="form-label">{`${props.strings.FirstName}*`}</label>
                             <FormInput
                                 placeholder="First Name"
                                 name="recipientFirstName"
@@ -62,7 +62,7 @@ const Address = (props) => {
                             />
                         </div>
                         <div className="form-group">
-                            <label className="form-label">{props.strings.LastName}</label>
+                            <label className="form-label">{`${props.strings.LastName}*`}</label>
                             <FormInput
                                 placeholder="Last Name"
                                 name="recipientLastName"
@@ -75,7 +75,7 @@ const Address = (props) => {
                     <div className="form-group">
                         <label className="form-label">{props.strings.StreetAddress}</label>
                         <FormInput
-                            placeholder="Street Address1"
+                            placeholder="Street Address 1"
                             name="line1"
                             handleOnChange={evt => handleShipping(evt)}
                             value={billingAddress.line1}
@@ -83,15 +83,16 @@ const Address = (props) => {
                         />
                         <br />
                         <FormInput
-                            placeholder="Street Address2"
+                            placeholder="Street Address 2"
                             name="line2"
                             handleOnChange={evt => handleShipping(evt)}
                             value={billingAddress.line2}
                             type="text"
+                            style={{ marginTop: 5 }}
                         />
                     </div>
                     <div className="form-group">
-                        <label className="form-label">{props.strings.City}</label>
+                        <label className="form-label">{`${props.strings.City}*`}</label>
                         <FormInput
                             placeholder="City"
                             name="city"
@@ -101,17 +102,25 @@ const Address = (props) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label className="form-label">{props.strings.State}</label>
-                        <FormInput
+                        <label className="form-label">{`${props.strings.State}*`}</label>
+                        {/* <FormInput
                             placeholder="State"
                             name="state"
                             handleOnChange={evt => handleShipping(evt)}
                             value={billingAddress.state}
                             type="text"
-                        />
+                        /> */}
+                        <select id="dropdown" name="state" value={billingAddress.state} onChange={handleShipping}>
+                            <option value="N/A" disabled="true">N/A</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Karnataka">Karnataka</option>
+                        </select>
                     </div>
                     <div className="form-group">
-                        <label className="form-label">{props.strings.Postal}</label>
+                        <label className="form-label">{`${props.strings.Postal}*`}</label>
                         <FormInput
                             placeholder="State"
                             name="postal_code"
@@ -121,7 +130,7 @@ const Address = (props) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label className="form-label">{props.strings.Phone}</label>
+                        <label className="form-label">{`${props.strings.Phone}*`}</label>
                         <FormInput
                             placeholder="Contact Number"
                             name="contactNo"
@@ -131,7 +140,7 @@ const Address = (props) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label className="form-label">{props.strings.EmailAddress}s</label>
+                        <label className="form-label">{props.strings.EmailAddress}</label>
                         <FormInput
                             placeholder="Email Address"
                             name="emailId"
@@ -158,7 +167,7 @@ Address.defaultProps = {
         State: "State",
         Postal: "Postal",
         Phone: "Phone Number",
-        EmailAddress: "EmailAddress",
+        EmailAddress: "Email Address",
     }
 }
 
