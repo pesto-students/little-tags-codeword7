@@ -24,7 +24,8 @@ const OrderHistory = (props) => {
     }, []);
 
     const formatText = (orderDate) => {
-        return moment(orderDate.nano).format('DD/MM/YY');
+        console.log(orderDate)
+        return moment(orderDate.nenoseconds).format('DD/MM/YY');
     }
 
     return (

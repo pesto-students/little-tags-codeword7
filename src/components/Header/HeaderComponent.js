@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import './HeaderComponent.scss'
 import DrawerToggle from '../DrawerToggle/DrawerToggle';
-import { FaShoppingCart } from 'react-icons/fa';
 // import { AiOutlineSearch } from 'react-icons/ai';
 import { BiLogIn } from 'react-icons/bi';
 import { FaShoppingBag } from 'react-icons/fa';
@@ -75,7 +74,8 @@ function HeaderComponent(props) {
   }
 
   useEffect(() => {
-    dispatch(fetchProductsStart({}))
+    dispatch(fetchProductsStart({}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSelectProduct = (id) => {

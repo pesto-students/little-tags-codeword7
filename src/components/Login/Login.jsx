@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './Login.scss';
 import { ImFacebook } from 'react-icons/im';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { GrFormClose } from 'react-icons/gr';
-import FirebaseContext from '../../Config/Firebase/context';
+
 import { useDispatch } from 'react-redux';
 import { googleSignInStart, facebookSignInStart, changeLoginModal } from '../../redux/User/user.actions';
 import withTranslator from '../../hoc/withTranslation';
@@ -16,7 +16,6 @@ const mapState = ({ user }) => ({
 })
 
 const Login = (props) => {
-    const firebase = useContext(FirebaseContext);
     const dispatch = useDispatch();
     const { loginModalFlag } = useSelector(mapState);
 
@@ -28,11 +27,6 @@ const Login = (props) => {
     const doFacebookSignIn = () => {
         dispatch(facebookSignInStart());
         props.setIsLoginModal(false);
-    }
-
-    const doPhoneNoSignIn = () => {
-        props.setIsLoginModal(false);
-        firebase.doPhoneNoSignIn();
     }
 
     return (
