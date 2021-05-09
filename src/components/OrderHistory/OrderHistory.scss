@@ -48,3 +48,18 @@
     font-size: 1.8rem;
     font-weight: 700;
 }
+
+@media(max-width:425px) {
+    .order-col {
+        padding: 2rem;
+    }
+    .order-row {
+        font-size: 1rem;
+    }
+    .order-heading {
+        font-size: 1rem;
+    }
+    .order-history-main {
+        padding: 1rem;
+    }
+}

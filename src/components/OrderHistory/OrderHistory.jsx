@@ -24,7 +24,6 @@ const OrderHistory = (props) => {
     }, []);
 
     const formatText = (orderDate) => {
-        console.log(orderDate)
         return moment(orderDate.nenoseconds).format('DD/MM/YY');
     }
 
@@ -33,7 +32,6 @@ const OrderHistory = (props) => {
             <div className="order-history-header">
                 <h2>{props.strings.OrderHistory}</h2>
             </div>
-            {console.log(orderHistory)}
             <div className="order-col">
                 <div className="order-row">
                     <div className="order-heading">{props.strings.OrderId}</div>

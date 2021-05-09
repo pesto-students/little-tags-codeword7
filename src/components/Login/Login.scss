@@ -140,3 +140,33 @@
 .close-btn {
     position: relative;
 }
+
+
+@media(max-width: 425px) {
+    .forms-wrapper {
+        max-width: 25rem;
+        padding: 3rem;
+    }
+    .facebook-btn {
+        padding: 1rem 0.5rem;
+        font-size: 1.3rem;
+        width: 25rem;
+    }
+    .google-btn {
+        padding: 1rem 0.5rem;
+        font-size: 1.3rem;
+        width: 25rem;
+    }
+    .or::after {
+        top: 1.7rem;
+        right: -2rem;
+    }
+    .or::before {
+        left: -2rem;
+        top: 1.7rem;
+    }
+    .close-btn-icon {
+        left: 25rem;
+        bottom: 0;
+    }
+}

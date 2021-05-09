@@ -75,3 +75,32 @@
   .address-header{
     position: relative;
   }
+
+
+  @media(max-width: 425px) {
+    .shipping-form {
+      top: 13%;
+      left: calc(50% - 13rem);
+      width: 23rem;
+    }
+    .address-details-heading {
+      font-size: 1rem;
+    }
+    .address-modal-close-icon {
+      left: -10rem;
+    }
+    .form-group {
+      margin-top: 1rem;
+    }
+    .form-label {
+      font-size: 8px;
+    }
+    .form-input {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+    .address-details-submit-btn {
+      padding: 1rem 0;
+      font-size: 1rem;
+    }
+}
