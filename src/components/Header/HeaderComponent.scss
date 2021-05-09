@@ -59,7 +59,8 @@
 }
 .login {
   color: white;
-    margin-left: 30rem;
+  margin: auto;
+    // margin-left: 30rem;
 }
 .login-item {
     display: flex;
@@ -170,6 +171,18 @@
     .logo {
       width: 25%;
     }
+    .login {
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+      margin: 0 5rem 0 0;
+    }
+    .login-icon {
+      font-size: 1.5rem;
+    }
+    .login-header-title {
+      font-size: 1.5rem;
+    }
     .SearchBar {
       width: 38%;
     }
@@ -178,6 +191,13 @@
     }
     .cartContainer {
       width: 36rem;
+    }
+    .search-item-result {
+      flex-wrap: wrap;
+    }
+    .search-result-title {
+      overflow: visible;
+      white-space: normal;
     }
 }
 
