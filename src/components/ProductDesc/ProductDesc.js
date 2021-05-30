@@ -25,10 +25,7 @@ function ProductDesc(props) {
   const { product, currentUser } = useSelector(mapState);
 
   const { sliderImages, image, size, title, price, description } = product;
-  // console.log('products', product)
-  // eslint-disable-next-line
   useEffect(() => {
-
     dispatch(
       fetchProductStart(productID)
     );

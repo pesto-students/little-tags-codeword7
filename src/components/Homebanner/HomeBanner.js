@@ -5,13 +5,6 @@ import withTranslator from '../../hoc/withTranslation';
 
 const HomeBanner = (props) => (
   <section className="HomeBanner">
-    {/* <div className="bannerText">
-      <h2>Online Free Market for Clothes</h2>
-      <p>Its time to recycle</p>
-      <button><Link to="/products">
-            Shop Now
-          </Link></button>
-    </div> */}
     <div className="banner-wrapper">
       <div className="left-banner-text">
         <div><p className="for-text">{props.strings.For}</p><p className="online-text"> {props.strings.Online} </p><p className="for-text">{props.strings.Order}</p></div>

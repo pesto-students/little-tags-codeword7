@@ -40,7 +40,6 @@ const Address = (props) => {
             contactNo,
             emailId
         }
-        console.log(billingDetails);
         dispatch(addUserAddressFlag(true));
         dispatch(addUserAddress(billingDetails));
         dispatch(dispatch(addAddressModal(false)));
@@ -51,7 +50,7 @@ const Address = (props) => {
             <div className="shipping-form">
                 <div className="address-header">
                     <h3 className="address-details-heading">Address Details</h3>
-                    <div className="address-modal-close-icon" onClick={() => dispatch(dispatch(addAddressModal(false)))}><GrFormClose className="close-btn-icon" /></div>
+                    <div className="address-modal-close-icon" onClick={() => dispatch(dispatch(addAddressModal(false)))}><GrFormClose className="close--address-btn-icon" /></div>
                 </div>
 
                 <form onSubmit={submitAddress}>
@@ -108,13 +107,6 @@ const Address = (props) => {
                     </div>
                     <div className="form-group">
                         <label className="form-label">{`${props.strings.State}*`}</label>
-                        {/* <FormInput
-                            placeholder="State"
-                            name="state"
-                            handleOnChange={evt => handleShipping(evt)}
-                            value={billingAddress.state}
-                            type="text"
-                        /> */}
                         <select id="dropdown" className="form-input" name="state" value={billingAddress.state} onChange={handleShipping}>
                             <option value="Andhra Pradesh">Andhra Pradesh</option>
                             <option value="Maharashtra">Maharashtra</option>

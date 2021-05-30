@@ -1,11 +1,10 @@
 import React from 'react';
 import './Login.scss';
-import { ImFacebook } from 'react-icons/im';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { GrFormClose } from 'react-icons/gr';
 
 import { useDispatch } from 'react-redux';
-import { googleSignInStart, facebookSignInStart, changeLoginModal } from '../../redux/User/user.actions';
+import { googleSignInStart, changeLoginModal } from '../../redux/User/user.actions';
 import withTranslator from '../../hoc/withTranslation';
 import { useSelector } from 'react-redux';
 
@@ -24,17 +23,17 @@ const Login = (props) => {
         props.setIsLoginModal(false);
     }
 
-    const doFacebookSignIn = () => {
-        dispatch(facebookSignInStart());
-        props.setIsLoginModal(false);
-    }
+    // const doFacebookSignIn = () => {
+    //     dispatch(facebookSignInStart());
+    //     props.setIsLoginModal(false);
+    // }
 
     return (
         <div className={loginModalFlag ? 'forms-wrapper' : 'forms-wrapper-hide'}>
             <div className="close-btn" onClick={() => dispatch(changeLoginModal(false))}><GrFormClose className="close-btn-icon" /></div>
             <div className="title"><h3 className="title-1">We're glad you're here. <br />{props.strings.WelcomeToXyz}</h3></div>
-            <div><button className="facebook-btn" onClick={doFacebookSignIn}><ImFacebook className="facebook-icon" /><span className="connect-fb">{props.strings.ConnectWithFacebook}</span></button></div>
-            <div className="or-paragraph"><div className="or">Or</div></div>
+            {/* <div><button className="facebook-btn" onClick={doFacebookSignIn}><ImFacebook className="facebook-icon" /><span className="connect-fb">{props.strings.ConnectWithFacebook}</span></button></div> */}
+            {/* <div className="or-paragraph"><div className="or">Or</div></div> */}
             <div><button className="google-btn" onClick={handleGoogleSignIn}><AiOutlineGoogle className="facebook-icon" /><span className="connect-fb">{props.strings.ConnectWithGoogle}</span></button></div>
 
         </div>

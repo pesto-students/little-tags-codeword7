@@ -21,8 +21,6 @@ function Cart(props) {
   const errMsg = 'You have no items in your cart.';
   const history = useHistory();
 
-
-
   const addCartItem = (product) => {
     dispatch(
       addProduct(product)
