@@ -1,106 +1,105 @@
 .shipping-form {
-    margin: auto;
-    border: 1px solid black;
-    padding: 2rem;
-     width: 60rem; 
-    /* max-width: 106rem; */
-    background-color: #fff;
-    position: fixed;
-    top: 10%;
-    left: calc(50% - 30rem);
-    // bottom: 40%;
-   z-index: 100;
-  }
-  .address-heading-details {
-    font-size: 2rem;
-    margin: 0;
-    font-family: 'Nunito';
-    letter-spacing: 0.1rem;
-  }
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-top: 2rem;
-    flex-grow: 1;
-  }
-  .form-label {
-    font-family: 'Nunito';
-    font-size: 13px;
-    margin-bottom: 0.4rem;
-      font-weight: 400;
-      letter-spacing: 0px;
-      font-style: normal;
-  }
-  .form-input {
-      padding: 0.7rem 1rem;
-      border: 1px solid #e0dede;
-      border-color: #e0dede;
-      outline: none;
-      border-width: 1px;
-      box-shadow: none;
-      border-radius: none;
-      box-sizing: border-box;
-      background-color: #fff;
-  }
-  .form-name-wrapper {
-    display: flex;
-    column-gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .street-address-1 {
-    margin-bottom: 1rem;
-  }
-  .address-details-submit-btn {
-    background-color: black;
-    border: none;
-    color: white;
-    padding: 1.5rem 0;
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1rem;
+  margin: auto;
+  border: 1px solid black;
+  padding: 2rem;
+  width: 60rem;
+  /* max-width: 106rem; */
+  background-color: #fff;
+  position: fixed;
+  top: 10%;
+  left: calc(50% - 30rem);
+  // bottom: 40%;
+  z-index: 100;
+}
+.address-heading-details {
+  font-size: 2rem;
+  margin: 0;
+  font-family: 'Nunito';
+  letter-spacing: 0.1rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  flex-grow: 1;
+}
+.form-label {
+  font-family: 'Nunito';
+  font-size: 13px;
+  margin-bottom: 0.4rem;
+  font-weight: 400;
+  letter-spacing: 0px;
+  font-style: normal;
+}
+.form-input {
+  padding: 0.7rem 1rem;
+  border: 1px solid #e0dede;
+  border-color: #e0dede;
+  outline: none;
+  border-width: 1px;
+  box-shadow: none;
+  border-radius: none;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.form-name-wrapper {
+  display: flex;
+  column-gap: 2rem;
+  flex-wrap: wrap;
+}
+.street-address-1 {
+  margin-bottom: 1rem;
+}
+.address-details-submit-btn {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 1.5rem 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+.address-details-heading {
+  margin: 0;
+  font-size: 1.5rem;
+  font-family: 'Nunito';
+  letter-spacing: 0.1rem;
+  font-family: 600;
+}
+.address-modal-close-icon {
+  right: 1rem;
+  font-size: 1.5rem;
+  top: 0rem;
+  position: absolute;
+}
+.address-header {
+  position: relative;
+}
+
+@media (max-width: 425px) {
+  .shipping-form {
+    top: 13%;
+    left: calc(50% - 13rem);
+    width: 23rem;
   }
   .address-details-heading {
-      margin: 0;
-      font-size: 1.5rem;
-      font-family: 'Nunito';
-      letter-spacing: 0.1rem;
-      font-family: 600;
+    font-size: 1rem;
   }
   .address-modal-close-icon {
-    position: absolute;
-    left: 27rem;
-    /* right: 1rem; */
-    top: 3.5rem;
+    left: 21rem;
   }
-  .address-header{
-    position: relative;
+  .form-group {
+    margin-top: 1rem;
   }
-
-
-  @media(max-width: 425px) {
-    .shipping-form {
-      top: 13%;
-      left: calc(50% - 13rem);
-      width: 23rem;
-    }
-    .address-details-heading {
-      font-size: 1rem;
-    }
-    .address-modal-close-icon {
-      left: -10rem;
-    }
-    .form-group {
-      margin-top: 1rem;
-    }
-    .form-label {
-      font-size: 8px;
-    }
-    .form-input {
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-    }
-    .address-details-submit-btn {
-      padding: 1rem 0;
-      font-size: 1rem;
-    }
+  .form-label {
+    font-size: 8px;
+  }
+  .form-input {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+  .address-details-submit-btn {
+    padding: 1rem 0;
+    font-size: 1rem;
+  }
 }

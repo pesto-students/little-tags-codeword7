@@ -60,7 +60,6 @@ function ShipmentAddress(props) {
     const configOrder = {
       orderTotal: total,
       userData: selectedUserAddress,
-      // userName: recipientFirstName + recipientLastName,
       orderItems: cartItems.map(item => {
         const { id, image, title, price, quantity } = item;
         return { id, image, title, price, quantity }

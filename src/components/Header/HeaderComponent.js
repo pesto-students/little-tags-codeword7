@@ -86,7 +86,6 @@ function HeaderComponent(props) {
 
   const onInputChange = (event) => {
     const value = event.target.value;
-    console.log(value.length);
     if (value === "" || value.length < 3) setOptions([]);
     else {
       const searchArray = products.map(item => {

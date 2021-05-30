@@ -25,10 +25,7 @@ function ProductCategory(props) {
     dispatch(fetchProductsStart({ filterType }))
 
     return () => {
-      console.log("Unmount Component");
       setProducts([]);
-      // setProduct({})
-      console.log("After Unmount Component");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterType]);
