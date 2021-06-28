@@ -18,6 +18,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
         userCheck: false,
         loginModalFlag: false
       }
+    case userTypes.SIGN_IN_FAIL:
+      return {
+        ...state,
+        currentUser: null,
+        loginModalFlag: false,
+        userCheck: false
+      }
     case userTypes.SIGN_OUT_USER_SUCCESS:
       return {
         ...state,
