@@ -1,7 +1,7 @@
 import { takeLatest, call, all, put } from 'redux-saga/effects';
 import { auth, handelUserProfile, getCurrentUser, GoogleProvider, FacebookProvider } from '../../Config/Firebase/util';
 import userTypes from './user.types';
-import { signInSuccess, signOutUserSuccess, userCheckedInSucess, addUserAddressFlag } from './user.actions';
+import { signInSuccess, signOutUserSuccess, userCheckedInSucess, addUserAddressFlag, signInUserFail } from './user.actions';
 import { addUserAddress } from './user.helper';
 
 
@@ -31,7 +31,7 @@ export function* isUserAuthenticated() {
     }
 
   } catch (err) {
-    console.log(err.message);
+    yield put(signInUserFail());
   }
 }
 
@@ -47,7 +47,7 @@ export function* googleSignIn() {
     const { user } = yield auth.signInWithPopup(GoogleProvider);
     yield getSnapshotFromUserAuth(user);
   } catch (err) {
-    console.log(err);
+    yield put(signInUserFail());
   }
 }
 

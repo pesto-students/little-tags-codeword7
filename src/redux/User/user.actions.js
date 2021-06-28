@@ -48,5 +48,9 @@ export const facebookSignInStart = () => ({
 export const changeLoginModal = (loginModalFlag) => ({
   type: userTypes.IS_LOGIN_MODAL_OPEN,
   payload: loginModalFlag
+});
+
+export const signInUserFail = () => ({
+  type: userTypes.SIGN_IN_FAIL
 })
 
